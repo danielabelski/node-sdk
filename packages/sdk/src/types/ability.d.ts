@@ -12,8 +12,11 @@ export type CbkAbilityName = 'abort'
   | 'agent/task/evaluate'
   | 'agent/task/plan'
   | 'attachment/read'
+  | 'blueprint/meta/fetch'
   | 'blueprint/note/list'
   | 'blueprint/resource/list'
+  | 'bot/apply'
+  | 'bot/apply[by-id]'
   | 'bot/ask'
   | 'bot/ask[by-id]'
   | 'bot/ask[multi]'
@@ -291,11 +294,30 @@ export type AttachmentReadParameters = {
   name: string
 }
 
+export type BlueprintMetaFetchParameters = {
+ /** optional JSONPath expression to filter the meta object (e.g. $.notes) */
+  jsonpath?: string
+ /** optional JMESPath expression to filter the meta object (e.g. notes.nodeId) */
+  jmespath?: string
+}
+
 export type BlueprintNoteListParameters = Record<string, never>
 
 export type BlueprintResourceListParameters = {
  /** optional resource type to filter by */
   type?: string
+}
+
+export type BotApplyParameters = {
+ /** optional timeout in milliseconds */
+  timeout?: number
+}
+
+export type BotApplyByIdParameters = {
+ /** the bot ID */
+  botId: string
+ /** optional timeout in milliseconds */
+  timeout?: number
 }
 
 export type BotAskParameters = {
@@ -1769,6 +1791,11 @@ export interface CbkAbilityRegistry {
     description: 'Read and extract content from uploaded file attachments. For text-based files, extracts and returns the text content. For image files (png, jpg, jpeg, gif, webp, bmp, tiff, svg), analyzes the image using vision capabilities. Locate the corresponding tool call for the attachment information. Does not support audio or video files.'
     parameters: AttachmentReadParameters
   }
+  'blueprint/meta/fetch': {
+    name: 'Fetch Current Blueprint Meta'
+    description: 'Retrieve the meta information of the current blueprint'
+    parameters: BlueprintMetaFetchParameters
+  }
   'blueprint/note/list': {
     name: 'List Current Blueprint Notes'
     description: 'List the notes stored in the current blueprint'
@@ -1778,6 +1805,16 @@ export interface CbkAbilityRegistry {
     name: 'List Current Blueprint Resources'
     description: 'List the resources available in the current blueprint'
     parameters: BlueprintResourceListParameters
+  }
+  'bot/apply': {
+    name: 'Apply Bot'
+    description: 'Apply another bot to the current context'
+    parameters: BotApplyParameters
+  }
+  'bot/apply[by-id]': {
+    name: 'Apply Bot'
+    description: 'Apply another bot to the current context'
+    parameters: BotApplyByIdParameters
   }
   'bot/ask': {
     name: 'Ask Bot'
@@ -1896,12 +1933,12 @@ export interface CbkAbilityRegistry {
   }
   'conversation/skillset/install[by-id]': {
     name: 'Install Skillset'
-    description: 'Bring a skillset into context by its ID'
+    description: 'Bring a skillset into context'
     parameters: ConversationSkillsetInstallByIdParameters
   }
   'conversation/skillset/uninstall[by-id]': {
     name: 'Uninstall Skillset'
-    description: 'Remove a skillset from context by its ID'
+    description: 'Remove a skillset from context'
     parameters: ConversationSkillsetUninstallByIdParameters
   }
   'dataset/create': {

@@ -3810,6 +3810,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/partner/user/{userId}/context/{contextId}/delete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Delete a partner user context */
+        post: operations["deletePartnerUserContext"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/partner/user/{userId}/context/{contextId}/fetch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fetch a partner user context */
+        get: operations["fetchPartnerUserContext"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/partner/user/{userId}/context/{contextId}/update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Update a partner user context */
+        post: operations["updatePartnerUserContext"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/partner/user/{userId}/context/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create partner user context */
+        post: operations["createPartnerUserContext"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/partner/user/{userId}/context/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List partner user contexts */
+        get: operations["listPartnerUserContexts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/partner/user/{userId}/delete": {
         parameters: {
             query?: never;
@@ -5485,7 +5570,7 @@ export interface components {
          * @description The type of the secret
          * @enum {string}
          */
-        SecretType: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+        SecretType: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
         /**
          * @description The kind of the secret
          * @enum {string}
@@ -20205,6 +20290,295 @@ export interface operations {
             };
         };
     };
+    deletePartnerUserContext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+                contextId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": Record<string, never>;
+            };
+        };
+        responses: {
+            /** @description The context was deleted successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the deleted context */
+                        id: string;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fetchPartnerUserContext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+                contextId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The context was retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The associated name */
+                        name?: string;
+                        /** @description The associated description */
+                        description?: string;
+                        /** @description Meta data information */
+                        meta?: {
+                            [key: string]: unknown;
+                        };
+                        /** @description The instance ID */
+                        id: string;
+                        /** @description The timestamp (ms) when the instance was created */
+                        createdAt: number;
+                        /** @description The timestamp (ms) when the instance was updated */
+                        updatedAt: number;
+                        blueprintId?: string;
+                        botId?: string;
+                        datasetId?: string;
+                        skillsetId?: string;
+                        payload?: Record<string, never>;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    updatePartnerUserContext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+                contextId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The associated name */
+                    name?: string;
+                    /** @description The associated description */
+                    description?: string;
+                    /** @description Meta data information */
+                    meta?: {
+                        [key: string]: unknown;
+                    };
+                    /** @description Context payload */
+                    payload?: Record<string, never>;
+                };
+            };
+        };
+        responses: {
+            /** @description The context was updated successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the updated context */
+                        id: string;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    createPartnerUserContext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The associated name */
+                    name?: string;
+                    /** @description The associated description */
+                    description?: string;
+                    /** @description Meta data information */
+                    meta?: {
+                        [key: string]: unknown;
+                    };
+                    /** @description Context payload */
+                    payload?: Record<string, never>;
+                };
+            };
+        };
+        responses: {
+            /** @description The partner user context was created successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The associated name */
+                        name?: string;
+                        /** @description The associated description */
+                        description?: string;
+                        /** @description Meta data information */
+                        meta?: {
+                            [key: string]: unknown;
+                        };
+                        /** @description The instance ID */
+                        id: string;
+                        /** @description The timestamp (ms) when the instance was created */
+                        createdAt: number;
+                        /** @description The timestamp (ms) when the instance was updated */
+                        updatedAt: number;
+                        blueprintId?: string;
+                        botId?: string;
+                        datasetId?: string;
+                        skillsetId?: string;
+                        payload?: Record<string, never>;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    listPartnerUserContexts: {
+        parameters: {
+            query?: {
+                cursor?: string;
+                order?: "asc" | "desc";
+                take?: number;
+                blueprintId?: string;
+                botId?: string;
+                datasetId?: string;
+                skillsetId?: string;
+            };
+            header?: never;
+            path: {
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The list of contexts was retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            /** @description The associated name */
+                            name?: string;
+                            /** @description The associated description */
+                            description?: string;
+                            /** @description Meta data information */
+                            meta?: {
+                                [key: string]: unknown;
+                            };
+                            /** @description The instance ID */
+                            id: string;
+                            /** @description The timestamp (ms) when the instance was created */
+                            createdAt: number;
+                            /** @description The timestamp (ms) when the instance was updated */
+                            updatedAt: number;
+                            blueprintId?: string;
+                            botId?: string;
+                            datasetId?: string;
+                            skillsetId?: string;
+                            payload?: Record<string, never>;
+                        }[];
+                        /** @description Cursor for fetching the next page */
+                        cursor: string;
+                    };
+                    "application/jsonl": {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "item";
+                        /** @description Instance list properties */
+                        data: {
+                            /** @description The associated name */
+                            name?: string;
+                            /** @description The associated description */
+                            description?: string;
+                            /** @description Meta data information */
+                            meta?: {
+                                [key: string]: unknown;
+                            };
+                            /** @description The instance ID */
+                            id: string;
+                            /** @description The timestamp (ms) when the instance was created */
+                            createdAt: number;
+                            /** @description The timestamp (ms) when the instance was updated */
+                            updatedAt: number;
+                            blueprintId?: string;
+                            botId?: string;
+                            datasetId?: string;
+                            skillsetId?: string;
+                            payload?: Record<string, never>;
+                        };
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     deletePartnerUser: {
         parameters: {
             query?: never;
@@ -22125,7 +22499,7 @@ export interface operations {
                              * @description The type of the secret
                              * @enum {string}
                              */
-                            type: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                            type: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                             /**
                              * @description The kind of the secret
                              * @enum {string}
@@ -22170,7 +22544,7 @@ export interface operations {
                              * @description The type of the secret
                              * @enum {string}
                              */
-                            type: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                            type: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                             /**
                              * @description The kind of the secret
                              * @enum {string}
@@ -22245,7 +22619,7 @@ export interface operations {
                              * @description The type of the secret
                              * @enum {string}
                              */
-                            type: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                            type: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                             /**
                              * @description The kind of the secret
                              * @enum {string}
@@ -23205,7 +23579,7 @@ export interface operations {
                          * @description The type of the secret
                          * @enum {string}
                          */
-                        type?: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                        type?: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                         /** @description The config of the secret */
                         config?: {
                             [key: string]: unknown;
@@ -23296,7 +23670,7 @@ export interface operations {
                      * @description The type of the secret
                      * @enum {string}
                      */
-                    type?: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                    type?: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                     /** @description The value of the secret */
                     value?: string;
                     /** @description The config of the secret */
@@ -23414,7 +23788,7 @@ export interface operations {
                      * @description The type of the secret
                      * @enum {string}
                      */
-                    type?: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                    type?: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                     /** @description The value of the secret */
                     value?: string;
                     /** @description The config of the secret */
@@ -23500,7 +23874,7 @@ export interface operations {
                              * @description The type of the secret
                              * @enum {string}
                              */
-                            type?: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                            type?: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                             /** @description The config of the secret */
                             config?: {
                                 [key: string]: unknown;
@@ -23547,7 +23921,7 @@ export interface operations {
                              * @description The type of the secret
                              * @enum {string}
                              */
-                            type?: "plain" | "basic" | "bearer" | "oauth" | "template" | "reference";
+                            type?: "plain" | "basic" | "bearer" | "jwt" | "oauth" | "template" | "reference";
                             /** @description The config of the secret */
                             config?: {
                                 [key: string]: unknown;
