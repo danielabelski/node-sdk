@@ -90,6 +90,8 @@
     "./src/model/v1.js",
     "./src/param.js",
     "./src/partner/index.js",
+    "./src/partner/user/context/index.js",
+    "./src/partner/user/context/v1.js",
     "./src/partner/user/index.js",
     "./src/partner/user/token/index.js",
     "./src/partner/user/token/v1.js",
