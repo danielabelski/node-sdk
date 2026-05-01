@@ -1,5 +1,11 @@
 # @chatbotkit/sdk
 
+## 1.33.0
+
+### Minor Changes
+
+- 8dbc935: Added missing API routes.
+
 ## 1.32.0
 
 ### Minor Changes
