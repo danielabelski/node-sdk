@@ -3929,6 +3929,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/partner/user/{userId}/session/create": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create a partner user session */
+        post: operations["createPartnerUserSession"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/partner/user/{userId}/token/{tokenId}/delete": {
         parameters: {
             query?: never;
@@ -3940,6 +3957,23 @@ export interface paths {
         put?: never;
         /** Delete a partner user token */
         post: operations["deletePartnerUserToken"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/partner/user/{userId}/token/{tokenId}/update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Update a partner user token */
+        post: operations["updatePartnerUserToken"];
         delete?: never;
         options?: never;
         head?: never;
@@ -20685,6 +20719,55 @@ export interface operations {
             };
         };
     };
+    createPartnerUserSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The lifetime of the session token in seconds */
+                    durationInSeconds?: number;
+                    config?: {
+                        /** @description Glob patterns restricting which API routes the token may access */
+                        allowedRoutes?: string[];
+                        /** @description Optional contact ID to include in the session token */
+                        contactId?: string;
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description The session was created successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the created session */
+                        id: string;
+                        /** @description The temporary session token */
+                        token: string;
+                        /** @description The timestamp for when the session token expires (in milliseconds) */
+                        expiresAt: number;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     deletePartnerUserToken: {
         parameters: {
             query?: never;
@@ -20722,6 +20805,52 @@ export interface operations {
             };
         };
     };
+    updatePartnerUserToken: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+                tokenId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The name of the token */
+                    name?: string;
+                    /** @description The description of the token */
+                    description?: string;
+                    /** @description Token configuration */
+                    config?: Record<string, never>;
+                    /** @description Custom metadata for the token */
+                    meta?: Record<string, never>;
+                };
+            };
+        };
+        responses: {
+            /** @description The user token was updated successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the updated user token */
+                        id: string;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     createPartnerUserToken: {
         parameters: {
             query?: never;
@@ -20733,7 +20862,16 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": Record<string, never>;
+                "application/json": {
+                    /** @description The name of the token */
+                    name?: string;
+                    /** @description The description of the token */
+                    description?: string;
+                    /** @description Token configuration */
+                    config?: Record<string, never>;
+                    /** @description Custom metadata for the token */
+                    meta?: Record<string, never>;
+                };
             };
         };
         responses: {

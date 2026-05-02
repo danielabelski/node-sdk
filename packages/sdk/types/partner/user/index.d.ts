@@ -12,6 +12,10 @@ export class PartnerUserClient extends ChatBotKitClient {
      */
     context: PartnerUserContextClient;
     /**
+     * @type {PartnerUserSessionClient} session client
+     */
+    session: PartnerUserSessionClient;
+    /**
      * @type {PartnerUserTokenClient} token client
      */
     token: PartnerUserTokenClient;
@@ -56,4 +60,5 @@ export default PartnerUserClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;
 import { ChatBotKitClient } from '../../client.js';
 import { PartnerUserContextClient } from './context/index.js';
+import { PartnerUserSessionClient } from './session/index.js';
 import { PartnerUserTokenClient } from './token/index.js';

@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "CBK API",
-    "version": "v1 (build 1777642361845)"
+    "version": "v1 (build 1777731271182)"
   },
   "servers": [
     {
@@ -34581,6 +34581,114 @@
         ]
       }
     },
+    "/partner/user/{userId}/session/create": {
+      "post": {
+        "operationId": "createPartnerUserSession",
+        "summary": "Create a partner user session",
+        "tags": [
+          "Partner"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "description": "The ID of the user",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "durationInSeconds": {
+                    "description": "The lifetime of the session token in seconds",
+                    "type": "number"
+                  },
+                  "config": {
+                    "type": "object",
+                    "properties": {
+                      "allowedRoutes": {
+                        "description": "Glob patterns restricting which API routes the token may access",
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "contactId": {
+                        "description": "Optional contact ID to include in the session token",
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The session was created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The ID of the created session",
+                      "type": "string"
+                    },
+                    "token": {
+                      "description": "The temporary session token",
+                      "type": "string"
+                    },
+                    "expiresAt": {
+                      "description": "The timestamp for when the session token expires (in milliseconds)",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "token",
+                    "expiresAt"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "type": "object",
+            "description": "An error response",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "The error message"
+              },
+              "code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            },
+            "required": [
+              "message",
+              "code"
+            ],
+            "$$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "__originalOperationId": "createPartnerUserSession",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/partner/user/{userId}/token/{tokenId}/delete": {
       "post": {
         "operationId": "deletePartnerUserToken",
@@ -34667,6 +34775,109 @@
         ]
       }
     },
+    "/partner/user/{userId}/token/{tokenId}/update": {
+      "post": {
+        "operationId": "updatePartnerUserToken",
+        "summary": "Update a partner user token",
+        "tags": [
+          "Partner"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "schema": {
+              "description": "The ID of the user",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "tokenId",
+            "required": true,
+            "schema": {
+              "description": "The ID of the user token to update",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "description": "The name of the token",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The description of the token",
+                    "type": "string"
+                  },
+                  "config": {
+                    "description": "Token configuration",
+                    "type": "object"
+                  },
+                  "meta": {
+                    "description": "Custom metadata for the token",
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The user token was updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The ID of the updated user token",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "type": "object",
+            "description": "An error response",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "The error message"
+              },
+              "code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            },
+            "required": [
+              "message",
+              "code"
+            ],
+            "$$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "__originalOperationId": "updatePartnerUserToken",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/partner/user/{userId}/token/create": {
       "post": {
         "operationId": "createPartnerUserToken",
@@ -34691,7 +34902,24 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "properties": {
+                  "name": {
+                    "description": "The name of the token",
+                    "type": "string"
+                  },
+                  "description": {
+                    "description": "The description of the token",
+                    "type": "string"
+                  },
+                  "config": {
+                    "description": "Token configuration",
+                    "type": "object"
+                  },
+                  "meta": {
+                    "description": "Custom metadata for the token",
+                    "type": "object"
+                  }
+                }
               }
             }
           }

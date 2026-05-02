@@ -3,6 +3,7 @@ import {
   createPartnerUserToken,
   deletePartnerUserToken,
   listPartnerUserTokens,
+  updatePartnerUserToken,
 } from './v1.js'
 
 /**
@@ -42,6 +43,18 @@ export class PartnerUserTokenClient extends ChatBotKitClient {
    */
   create(userId, request) {
     return createPartnerUserToken(this, userId, request)
+  }
+
+  /**
+   * Updates the user token.
+   *
+   * @param {string} userId
+   * @param {string} tokenId
+   * @param {import('./v1.js').PartnerUserTokenUpdateRequest} request
+   * @returns {Promise<import('./v1.js').PartnerUserTokenUpdateResponse>}
+   */
+  update(userId, tokenId, request) {
+    return updatePartnerUserToken(this, userId, tokenId, request)
   }
 
   /**

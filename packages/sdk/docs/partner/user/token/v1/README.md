@@ -20,6 +20,10 @@
 - [PartnerUserTokenListRequest](type-aliases/PartnerUserTokenListRequest.md)
 - [PartnerUserTokenListResponse](type-aliases/PartnerUserTokenListResponse.md)
 - [PartnerUserTokenListStreamType](type-aliases/PartnerUserTokenListStreamType.md)
+- [PartnerUserTokenUpdateRequest](type-aliases/PartnerUserTokenUpdateRequest.md)
+- [PartnerUserTokenUpdateRequestBody](type-aliases/PartnerUserTokenUpdateRequestBody.md)
+- [PartnerUserTokenUpdateResponse](type-aliases/PartnerUserTokenUpdateResponse.md)
+- [PartnerUserTokenUpdateResponseBody](type-aliases/PartnerUserTokenUpdateResponseBody.md)
 - [ResponsePromise](type-aliases/ResponsePromise.md)
 
 ## Functions
@@ -27,3 +31,4 @@
 - [createPartnerUserToken](functions/createPartnerUserToken.md)
 - [deletePartnerUserToken](functions/deletePartnerUserToken.md)
 - [listPartnerUserTokens](functions/listPartnerUserTokens.md)
+- [updatePartnerUserToken](functions/updatePartnerUserToken.md)

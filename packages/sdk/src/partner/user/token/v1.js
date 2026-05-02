@@ -63,6 +63,35 @@ export async function createPartnerUserToken(client, userId, request) {
 }
 
 /**
+ * @typedef {import('../../../types/api/v1.js').operations['updatePartnerUserToken']['requestBody']['content']['application/json']} PartnerUserTokenUpdateRequestBody
+ *
+ * @typedef {PartnerUserTokenUpdateRequestBody} PartnerUserTokenUpdateRequest
+ *
+ * @typedef {import('../../../types/api/v1.js').operations['updatePartnerUserToken']['responses']['200']['content']['application/json']} PartnerUserTokenUpdateResponseBody
+ *
+ * @typedef {PartnerUserTokenUpdateResponseBody} PartnerUserTokenUpdateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} userId
+ * @param {string} tokenId
+ * @param {PartnerUserTokenUpdateRequest} request
+ * @returns {Promise<PartnerUserTokenUpdateResponse>}
+ */
+export async function updatePartnerUserToken(client, userId, tokenId, request) {
+  const url = `/api/v1/partner/user/${userId}/token/${tokenId}/update`
+
+  /** @type {PartnerUserTokenUpdateResponseBody} */
+  const response = await client.clientFetch(url, {
+    /** @type {PartnerUserTokenUpdateRequestBody} */
+    record: {
+      ...request,
+    },
+  })
+
+  return response
+}
+
+/**
  * @typedef {import('../../../types/api/v1.js').operations['deletePartnerUserToken']['requestBody']['content']['application/json']} PartnerUserTokenDeleteRequestBody
  *
  * @typedef {PartnerUserTokenDeleteRequestBody} PartnerUserTokenDeleteRequest

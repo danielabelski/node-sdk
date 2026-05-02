@@ -6,7 +6,7 @@
 
 # Class: PartnerUserTokenClient
 
-Defined in: [partner/user/token/index.js:17](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L17)
+Defined in: [partner/user/token/index.js:18](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L18)
 
 Partner user token client.
 
@@ -20,7 +20,7 @@ Partner user token client.
 
 > **new PartnerUserTokenClient**(`options`): `PartnerUserTokenClient`
 
-Defined in: [partner/user/token/index.js:21](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L21)
+Defined in: [partner/user/token/index.js:22](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L22)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [partner/user/token/index.js:21](https://github.com/chatbotkit/node-
 
 > **create**(`userId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/token/index.js:43](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L43)
+Defined in: [partner/user/token/index.js:44](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L44)
 
 Creates a new user token.
 
@@ -54,8 +54,6 @@ Creates a new user token.
 
 ##### request
 
-[`Record`](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type)\<`string`, `never`\>
-
 #### Returns
 
 [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
@@ -66,7 +64,7 @@ Creates a new user token.
 
 > **delete**(`userId`, `tokenId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/token/index.js:54](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L54)
+Defined in: [partner/user/token/index.js:67](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L67)
 
 Deletes the user token.
 
@@ -124,7 +122,7 @@ A new instance of the same client class with extended options
 
 > **list**(`userId`, `request?`): [`ResponsePromise`](../../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \}\>
 
-Defined in: [partner/user/token/index.js:32](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L32)
+Defined in: [partner/user/token/index.js:33](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L33)
 
 Retrieves a list of all user tokens.
 
@@ -141,3 +139,29 @@ Retrieves a list of all user tokens.
 #### Returns
 
 [`ResponsePromise`](../../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \}\>
+
+***
+
+### update()
+
+> **update**(`userId`, `tokenId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
+
+Defined in: [partner/user/token/index.js:56](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/index.js#L56)
+
+Updates the user token.
+
+#### Parameters
+
+##### userId
+
+`string`
+
+##### tokenId
+
+`string`
+
+##### request
+
+#### Returns
+
+[`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>

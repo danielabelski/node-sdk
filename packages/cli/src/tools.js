@@ -1,5 +1,7 @@
 import { tools } from '@chatbotkit/agent'
 
+import { InvalidArgumentError } from 'commander'
+
 export { tools }
 
 /**
@@ -18,6 +20,33 @@ export function getTools(selectedTools) {
   return Object.fromEntries(
     Object.entries(tools).filter(([name]) => selectedTools.includes(name))
   )
+}
+
+/**
+ * Parse a tool selection option, supporting comma-separated and variadic forms.
+ *
+ * @param {string} value
+ * @param {Array<keyof typeof tools>} [previous]
+ * @returns {Array<keyof typeof tools>}
+ */
+export function parseSelectedTools(value, previous = []) {
+  const selectedTools = value
+    .split(',')
+    .map((name) => name.trim())
+    .filter(Boolean)
+
+  const availableToolNames = new Set(getToolNames())
+  const invalidTools = selectedTools.filter(
+    (toolName) => !availableToolNames.has(toolName)
+  )
+
+  if (invalidTools.length > 0) {
+    throw new InvalidArgumentError(
+      `Unknown tool names: ${invalidTools.join(', ')}`
+    )
+  }
+
+  return [...previous, ...selectedTools]
 }
 
 /**
