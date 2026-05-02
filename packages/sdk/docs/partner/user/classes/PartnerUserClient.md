@@ -6,7 +6,7 @@
 
 # Class: PartnerUserClient
 
-Defined in: [partner/user/index.js:21](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L21)
+Defined in: [partner/user/index.js:22](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L22)
 
 Partner user client.
 
@@ -20,7 +20,7 @@ Partner user client.
 
 > **new PartnerUserClient**(`options`): `PartnerUserClient`
 
-Defined in: [partner/user/index.js:25](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L25)
+Defined in: [partner/user/index.js:26](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L26)
 
 #### Parameters
 
@@ -40,9 +40,17 @@ Defined in: [partner/user/index.js:25](https://github.com/chatbotkit/node-sdk/bl
 
 ### context
 
-> **context**: `PartnerUserContextClient`
+> **context**: [`PartnerUserContextClient`](../context/classes/PartnerUserContextClient.md)
 
-Defined in: [partner/user/index.js:31](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L31)
+Defined in: [partner/user/index.js:32](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L32)
+
+***
+
+### session
+
+> **session**: [`PartnerUserSessionClient`](../session/classes/PartnerUserSessionClient.md)
+
+Defined in: [partner/user/index.js:37](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L37)
 
 ***
 
@@ -50,7 +58,7 @@ Defined in: [partner/user/index.js:31](https://github.com/chatbotkit/node-sdk/bl
 
 > **token**: [`PartnerUserTokenClient`](../token/classes/PartnerUserTokenClient.md)
 
-Defined in: [partner/user/index.js:36](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L36)
+Defined in: [partner/user/index.js:42](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L42)
 
 ## Methods
 
@@ -58,7 +66,7 @@ Defined in: [partner/user/index.js:36](https://github.com/chatbotkit/node-sdk/bl
 
 > **create**(`request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/index.js:65](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L65)
+Defined in: [partner/user/index.js:71](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L71)
 
 Creates a new user.
 
@@ -76,7 +84,7 @@ Creates a new user.
 
 > **delete**(`userId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/index.js:86](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L86)
+Defined in: [partner/user/index.js:92](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L92)
 
 Deletes the user.
 
@@ -130,7 +138,7 @@ A new instance of the same client class with extended options
 
 > **fetch**(`userId`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, `never`\>
 
-Defined in: [partner/user/index.js:55](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L55)
+Defined in: [partner/user/index.js:61](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L61)
 
 Fetches a user.
 
@@ -150,7 +158,7 @@ Fetches a user.
 
 > **list**(`request?`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \}\>
 
-Defined in: [partner/user/index.js:45](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L45)
+Defined in: [partner/user/index.js:51](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L51)
 
 Retrieves a list of all users.
 
@@ -170,7 +178,7 @@ Retrieves a list of all users.
 
 > **update**(`userId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/index.js:76](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L76)
+Defined in: [partner/user/index.js:82](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/index.js#L82)
 
 Updates the user.
 

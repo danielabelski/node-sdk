@@ -1,5 +1,6 @@
 import { ChatBotKitClient } from '../../client.js'
 import { PartnerUserContextClient } from './context/index.js'
+import { PartnerUserSessionClient } from './session/index.js'
 import { PartnerUserTokenClient } from './token/index.js'
 import {
   createPartnerUser,
@@ -29,6 +30,11 @@ export class PartnerUserClient extends ChatBotKitClient {
      * @type {PartnerUserContextClient} context client
      */
     this.context = new PartnerUserContextClient(options)
+
+    /**
+     * @type {PartnerUserSessionClient} session client
+     */
+    this.session = new PartnerUserSessionClient(options)
 
     /**
      * @type {PartnerUserTokenClient} token client

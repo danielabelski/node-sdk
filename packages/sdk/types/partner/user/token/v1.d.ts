@@ -40,6 +40,22 @@ export function listPartnerUserTokens(client: ChatBotKitClient, userId: string, 
  */
 export function createPartnerUserToken(client: ChatBotKitClient, userId: string, request: PartnerUserTokenCreateRequest): Promise<PartnerUserTokenCreateResponse>;
 /**
+ * @typedef {import('../../../types/api/v1.js').operations['updatePartnerUserToken']['requestBody']['content']['application/json']} PartnerUserTokenUpdateRequestBody
+ *
+ * @typedef {PartnerUserTokenUpdateRequestBody} PartnerUserTokenUpdateRequest
+ *
+ * @typedef {import('../../../types/api/v1.js').operations['updatePartnerUserToken']['responses']['200']['content']['application/json']} PartnerUserTokenUpdateResponseBody
+ *
+ * @typedef {PartnerUserTokenUpdateResponseBody} PartnerUserTokenUpdateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} userId
+ * @param {string} tokenId
+ * @param {PartnerUserTokenUpdateRequest} request
+ * @returns {Promise<PartnerUserTokenUpdateResponse>}
+ */
+export function updatePartnerUserToken(client: ChatBotKitClient, userId: string, tokenId: string, request: PartnerUserTokenUpdateRequest): Promise<PartnerUserTokenUpdateResponse>;
+/**
  * @typedef {import('../../../types/api/v1.js').operations['deletePartnerUserToken']['requestBody']['content']['application/json']} PartnerUserTokenDeleteRequestBody
  *
  * @typedef {PartnerUserTokenDeleteRequestBody} PartnerUserTokenDeleteRequest
@@ -69,6 +85,10 @@ export type PartnerUserTokenCreateRequestBody = import("../../../types/api/v1.js
 export type PartnerUserTokenCreateRequest = PartnerUserTokenCreateRequestBody;
 export type PartnerUserTokenCreateResponseBody = import("../../../types/api/v1.js").operations["createPartnerUserToken"]["responses"]["200"]["content"]["application/json"];
 export type PartnerUserTokenCreateResponse = PartnerUserTokenCreateResponseBody;
+export type PartnerUserTokenUpdateRequestBody = import("../../../types/api/v1.js").operations["updatePartnerUserToken"]["requestBody"]["content"]["application/json"];
+export type PartnerUserTokenUpdateRequest = PartnerUserTokenUpdateRequestBody;
+export type PartnerUserTokenUpdateResponseBody = import("../../../types/api/v1.js").operations["updatePartnerUserToken"]["responses"]["200"]["content"]["application/json"];
+export type PartnerUserTokenUpdateResponse = PartnerUserTokenUpdateResponseBody;
 export type PartnerUserTokenDeleteRequestBody = import("../../../types/api/v1.js").operations["deletePartnerUserToken"]["requestBody"]["content"]["application/json"];
 export type PartnerUserTokenDeleteRequest = PartnerUserTokenDeleteRequestBody;
 export type PartnerUserTokenDeleteResponseBody = import("../../../types/api/v1.js").operations["deletePartnerUserToken"]["responses"]["200"]["content"]["application/json"];

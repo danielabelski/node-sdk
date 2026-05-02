@@ -98,7 +98,7 @@ This means your agent can interact with your local development environment while
 **Agent Options:**
 
 - `-p, --prompt <text>` - Task to execute
-- `-t, --tools <names>` - Comma-separated list of tools to enable (defaults to all standard tools)
+- `-t, --tools <names>` - Tool list to enable. Accepts comma-separated values like `read,write` or space-separated values like `read write` (defaults to all standard tools)
 - `-m, --model <name>` - AI model to use
 
 **Example:**
@@ -106,6 +106,9 @@ This means your agent can interact with your local development environment while
 ```bash
 # Run agent with specific tools only
 cbk agent -t read,write -p "Read package.json and create a backup"
+
+# Equivalent space-separated form
+cbk agent -t read write -p "Read package.json and create a backup"
 
 # Use custom timeout for long-running commands
 cbk agent -p "Run tests with 60 second timeout" -m gpt-5

@@ -22,8 +22,6 @@ Defined in: [partner/user/token/v1.js:51](https://github.com/chatbotkit/node-sdk
 
 ### request
 
-[`Record`](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type)\<`string`, `never`\>
-
 ## Returns
 
 [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>

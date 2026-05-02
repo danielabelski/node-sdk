@@ -8,7 +8,7 @@
 
 > **deletePartnerUserToken**(`client`, `userId`, `tokenId`, `request?`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [partner/user/token/v1.js:80](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/v1.js#L80)
+Defined in: [partner/user/token/v1.js:109](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/partner/user/token/v1.js#L109)
 
 ## Parameters
 

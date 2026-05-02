@@ -2,7 +2,7 @@ import { formatBlue } from '../../color.js'
 import { getRUNAS_USERID, getSECRET } from '../../env.js'
 import { print, printError } from '../../output.js'
 import { Spinner } from '../../spinner.js'
-import { getToolNames, getTools } from '../../tools.js'
+import { getTools, parseSelectedTools } from '../../tools.js'
 
 import {
   createSkillsFeature,
@@ -154,8 +154,8 @@ export const command = new Command()
     ).makeOptionMandatory()
   )
   .addOption(
-    new Option('-t, --tools <tools...>', 'Specific tools to enable').choices(
-      getToolNames()
+    new Option('-t, --tools <tools...>', 'Specific tools to enable').argParser(
+      parseSelectedTools
     )
   )
   .addOption(

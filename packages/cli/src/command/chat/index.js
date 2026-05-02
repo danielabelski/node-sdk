@@ -1,6 +1,6 @@
 import { getRUNAS_USERID, getSECRET } from '../../env.js'
 import { Spinner } from '../../spinner.js'
-import { getToolNames, getTools } from '../../tools.js'
+import { getTools, parseSelectedTools } from '../../tools.js'
 
 import {
   createSkillsFeature,
@@ -31,8 +31,8 @@ export const command = new Command()
   .addOption(new Option('--skillset <skillset>', 'Skillset id'))
   .addOption(new Option('--dataset <dataset>', 'Dataset id'))
   .addOption(
-    new Option('-t, --tools <tools...>', 'Specific tools to enable').choices(
-      getToolNames()
+    new Option('-t, --tools <tools...>', 'Specific tools to enable').argParser(
+      parseSelectedTools
     )
   )
   .addOption(

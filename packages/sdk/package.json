@@ -920,6 +920,26 @@
       "types": "./types/partner/user/index.d.ts",
       "import": "./src/partner/user/index.js"
     },
+    "./partner/user/session": {
+      "types": "./types/partner/user/session/index.d.ts",
+      "import": "./src/partner/user/session/index.js"
+    },
+    "./partner/user/session/index": {
+      "types": "./types/partner/user/session/index.d.ts",
+      "import": "./src/partner/user/session/index.js"
+    },
+    "./partner/user/session/index.js": {
+      "types": "./types/partner/user/session/index.d.ts",
+      "import": "./src/partner/user/session/index.js"
+    },
+    "./partner/user/session/v1": {
+      "types": "./types/partner/user/session/v1.d.ts",
+      "import": "./src/partner/user/session/v1.js"
+    },
+    "./partner/user/session/v1.js": {
+      "types": "./types/partner/user/session/v1.d.ts",
+      "import": "./src/partner/user/session/v1.js"
+    },
     "./partner/user/token": {
       "types": "./types/partner/user/token/index.d.ts",
       "import": "./src/partner/user/token/index.js"
