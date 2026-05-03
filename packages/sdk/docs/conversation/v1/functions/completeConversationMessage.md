@@ -6,7 +6,7 @@
 
 # Function: completeConversationMessage()
 
-> **completeConversationMessage**(`client`, `conversationId`, `request`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \}\>
+> **completeConversationMessage**(`client`, `conversationId`, `request`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \}\>
 
 Defined in: [conversation/v1.js:229](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/conversation/v1.js#L229)
 
@@ -24,4 +24,4 @@ Defined in: [conversation/v1.js:229](https://github.com/chatbotkit/node-sdk/blob
 
 ## Returns
 
-[`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \}\>
+[`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \} \| \{ \}\>

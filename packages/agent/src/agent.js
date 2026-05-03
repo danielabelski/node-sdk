@@ -1,3 +1,4 @@
+import { access } from 'fs/promises'
 import { readFile } from 'fs/promises'
 import yaml from 'js-yaml'
 import { resolve } from 'path'
@@ -46,16 +47,41 @@ function parseAgentFile(content) {
 }
 
 /**
+ * @typedef {{ roots?: string[] }} LoadAgentOptions
+ */
+
+/**
  * Loads an agent definition from a markdown file. The file may contain an
  * optional YAML front matter block with `backstory`, `model`, `name`, and
  * `description` fields. The markdown body is appended to `backstory` (if any)
  * to form the final backstory string.
  *
  * @param {string} filePath - Path to the agent markdown file (absolute or relative to cwd)
+ * @param {LoadAgentOptions} [options]
  * @returns {Promise<AgentDefinition>}
+ * @throws {Error} If the file cannot be found or read
  */
-export async function loadAgent(filePath) {
-  const resolvedPath = resolve(process.cwd(), filePath)
+export async function loadAgent(filePath, options) {
+  const roots = [process.cwd(), ...(options?.roots ?? [])]
+
+  let resolvedPath
+
+  for (const root of roots) {
+    const candidate = resolve(root, filePath)
+
+    try {
+      await access(candidate)
+
+      resolvedPath = candidate
+      break
+    } catch {
+      // not found in this root, try next
+    }
+  }
+
+  if (!resolvedPath) {
+    throw new Error(`Agent file not found: ${filePath}`)
+  }
 
   const content = await readFile(resolvedPath, 'utf-8')
 

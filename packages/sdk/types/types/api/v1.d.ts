@@ -5556,6 +5556,16 @@ export interface components {
          */
         TaskOutcome: "pending" | "success" | "failure";
         /**
+         * @description The trigger integration status
+         * @enum {string}
+         */
+        TriggerIntegrationStatus: "idle" | "running" | "canceled";
+        /**
+         * @description The trigger integration outcome
+         * @enum {string}
+         */
+        TriggerIntegrationOutcome: "pending" | "success" | "failure";
+        /**
          * @description The blueprint visibility
          * @enum {string}
          */
@@ -5624,14 +5634,21 @@ export interface components {
          * @description The reason why the completion ended
          * @enum {string}
          */
-        CompleteReason: "length" | "stop" | "activity" | "error" | "iteration";
+        CompleteReason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
+        /** @description Information about an abort event in a streamed response */
+        Abort: {
+            /** @description The abort reason if available */
+            reason?: unknown;
+            /** @description The function or tool associated with the abort */
+            functionName?: string;
+        };
         /** @description Information about why the completion ended */
         CompleteEnd: {
             /**
              * @description The reason why the completion ended
              * @enum {string}
              */
-            reason: "length" | "stop" | "activity" | "error" | "iteration";
+            reason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
         };
         /** @description Execution limits to control conversation processing bounds */
         ExecutionLimits: {
@@ -5924,6 +5941,19 @@ export interface components {
                 meta?: {
                     [key: string]: unknown;
                 };
+            };
+        } | {
+            /**
+             * @description The type of event
+             * @enum {string}
+             */
+            type: "abort";
+            /** @description Information about an abort event in a streamed response */
+            data: {
+                /** @description The abort reason if available */
+                reason?: unknown;
+                /** @description The function or tool associated with the abort */
+                functionName?: string;
             };
         } | {
             /**
@@ -8724,7 +8754,7 @@ export interface operations {
                              * @description The reason why the completion ended
                              * @enum {string}
                              */
-                            reason: "length" | "stop" | "activity" | "error" | "iteration";
+                            reason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
                         };
                     };
                     "application/jsonl": {
@@ -8749,7 +8779,7 @@ export interface operations {
                                  * @description The reason why the completion ended
                                  * @enum {string}
                                  */
-                                reason: "length" | "stop" | "activity" | "error" | "iteration";
+                                reason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
                             };
                         };
                     } | ({
@@ -8804,6 +8834,19 @@ export interface operations {
                             meta?: {
                                 [key: string]: unknown;
                             };
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "abort";
+                        /** @description Information about an abort event in a streamed response */
+                        data: {
+                            /** @description The abort reason if available */
+                            reason?: unknown;
+                            /** @description The function or tool associated with the abort */
+                            functionName?: string;
                         };
                     } | {
                         /**
@@ -9886,6 +9929,19 @@ export interface operations {
                          * @description The type of event
                          * @enum {string}
                          */
+                        type: "abort";
+                        /** @description Information about an abort event in a streamed response */
+                        data: {
+                            /** @description The abort reason if available */
+                            reason?: unknown;
+                            /** @description The function or tool associated with the abort */
+                            functionName?: string;
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
                         type: "completeBegin";
                         /** @description The data for the event */
                         data: {
@@ -10179,6 +10235,19 @@ export interface operations {
                             meta?: {
                                 [key: string]: unknown;
                             };
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "abort";
+                        /** @description Information about an abort event in a streamed response */
+                        data: {
+                            /** @description The abort reason if available */
+                            reason?: unknown;
+                            /** @description The function or tool associated with the abort */
+                            functionName?: string;
                         };
                     } | {
                         /**
@@ -10628,7 +10697,7 @@ export interface operations {
                              * @description The reason why the completion ended
                              * @enum {string}
                              */
-                            reason: "length" | "stop" | "activity" | "error" | "iteration";
+                            reason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
                         };
                     };
                     "application/jsonl": {
@@ -10651,7 +10720,7 @@ export interface operations {
                                  * @description The reason why the completion ended
                                  * @enum {string}
                                  */
-                                reason: "length" | "stop" | "activity" | "error" | "iteration";
+                                reason: "length" | "stop" | "activity" | "abort" | "error" | "iteration";
                             };
                         };
                     } | ({
@@ -10706,6 +10775,19 @@ export interface operations {
                             meta?: {
                                 [key: string]: unknown;
                             };
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "abort";
+                        /** @description Information about an abort event in a streamed response */
+                        data: {
+                            /** @description The abort reason if available */
+                            reason?: unknown;
+                            /** @description The function or tool associated with the abort */
+                            functionName?: string;
                         };
                     } | {
                         /**
@@ -18071,6 +18153,20 @@ export interface operations {
                         maxIterations?: number;
                         /** @description The maximum time per trigger execution (in milliseconds) */
                         maxTime?: number;
+                        /**
+                         * @description The trigger integration status
+                         * @enum {string}
+                         */
+                        status?: "idle" | "running" | "canceled";
+                        /**
+                         * @description The trigger integration outcome
+                         * @enum {string}
+                         */
+                        outcome?: "pending" | "success" | "failure";
+                        /** @description The timestamp (ms) of the last trigger execution */
+                        lastTriggerAt?: number | null;
+                        /** @description The timestamp (ms) of the next scheduled trigger execution */
+                        nextTriggerAt?: number | null;
                     };
                 };
             };
@@ -18325,6 +18421,20 @@ export interface operations {
                             maxIterations?: number;
                             /** @description The maximum time per trigger execution (in milliseconds) */
                             maxTime?: number;
+                            /**
+                             * @description The trigger integration status
+                             * @enum {string}
+                             */
+                            status?: "idle" | "running" | "canceled";
+                            /**
+                             * @description The trigger integration outcome
+                             * @enum {string}
+                             */
+                            outcome?: "pending" | "success" | "failure";
+                            /** @description The timestamp (ms) of the last trigger execution */
+                            lastTriggerAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled trigger execution */
+                            nextTriggerAt?: number | null;
                         }[];
                         /** @description Cursor for fetching the next page */
                         cursor: string;
@@ -18367,6 +18477,20 @@ export interface operations {
                             maxIterations?: number;
                             /** @description The maximum time per trigger execution (in milliseconds) */
                             maxTime?: number;
+                            /**
+                             * @description The trigger integration status
+                             * @enum {string}
+                             */
+                            status?: "idle" | "running" | "canceled";
+                            /**
+                             * @description The trigger integration outcome
+                             * @enum {string}
+                             */
+                            outcome?: "pending" | "success" | "failure";
+                            /** @description The timestamp (ms) of the last trigger execution */
+                            lastTriggerAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled trigger execution */
+                            nextTriggerAt?: number | null;
                         };
                     };
                 };
@@ -24265,6 +24389,19 @@ export interface operations {
                          * @description The type of event
                          * @enum {string}
                          */
+                        type: "abort";
+                        /** @description Information about an abort event in a streamed response */
+                        data: {
+                            /** @description The abort reason if available */
+                            reason?: unknown;
+                            /** @description The function or tool associated with the abort */
+                            functionName?: string;
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
                         type: "completeBegin";
                         /** @description The data for the event */
                         data: {
@@ -25881,6 +26018,10 @@ export interface operations {
                         botId?: string;
                         /** @description The schedule of the task */
                         schedule?: string;
+                        /** @description The maximum number of iterations per task execution */
+                        maxIterations?: number;
+                        /** @description The maximum time per task execution (in milliseconds) */
+                        maxTime?: number;
                         /**
                          * @description The task execution status
                          * @enum {string}
@@ -25891,10 +26032,10 @@ export interface operations {
                          * @enum {string}
                          */
                         outcome?: "pending" | "success" | "failure";
-                        /** @description The maximum number of iterations per task execution */
-                        maxIterations?: number;
-                        /** @description The maximum time per task execution (in milliseconds) */
-                        maxTime?: number;
+                        /** @description The timestamp (ms) of the last task execution */
+                        lastRunAt?: number | null;
+                        /** @description The timestamp (ms) of the next scheduled task execution */
+                        nextRunAt?: number | null;
                     };
                 };
             };
@@ -26192,6 +26333,10 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                             /**
                              * @description The task execution status
                              * @enum {string}
@@ -26202,10 +26347,10 @@ export interface operations {
                              * @enum {string}
                              */
                             outcome?: "pending" | "success" | "failure";
-                            /** @description The maximum number of iterations per task execution */
-                            maxIterations?: number;
-                            /** @description The maximum time per task execution (in milliseconds) */
-                            maxTime?: number;
+                            /** @description The timestamp (ms) of the last task execution */
+                            lastRunAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled task execution */
+                            nextRunAt?: number | null;
                         }[];
                         /** @description Cursor for fetching the next page */
                         cursor: string;
@@ -26238,6 +26383,10 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                             /**
                              * @description The task execution status
                              * @enum {string}
@@ -26248,10 +26397,10 @@ export interface operations {
                              * @enum {string}
                              */
                             outcome?: "pending" | "success" | "failure";
-                            /** @description The maximum number of iterations per task execution */
-                            maxIterations?: number;
-                            /** @description The maximum time per task execution (in milliseconds) */
-                            maxTime?: number;
+                            /** @description The timestamp (ms) of the last task execution */
+                            lastRunAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled task execution */
+                            nextRunAt?: number | null;
                         };
                     };
                 };
