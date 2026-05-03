@@ -1,11 +1,5 @@
 # @chatbotkit/sdk
 
-## 1.34.0
-
-### Minor Changes
-
-- c39eb6c: Updated apis and types.
-
 ## 1.33.0
 
 ### Minor Changes

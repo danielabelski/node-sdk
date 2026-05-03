@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "CBK API",
-    "version": "v1 (build 1777731271182)"
+    "version": "v1 (build 1777804055604)"
   },
   "servers": [
     {
@@ -173,6 +173,24 @@
       "TaskOutcome": {
         "type": "string",
         "description": "The task execution outcome",
+        "enum": [
+          "pending",
+          "success",
+          "failure"
+        ]
+      },
+      "TriggerIntegrationStatus": {
+        "type": "string",
+        "description": "The trigger integration status",
+        "enum": [
+          "idle",
+          "running",
+          "canceled"
+        ]
+      },
+      "TriggerIntegrationOutcome": {
+        "type": "string",
+        "description": "The trigger integration outcome",
         "enum": [
           "pending",
           "success",
@@ -389,9 +407,23 @@
           "length",
           "stop",
           "activity",
+          "abort",
           "error",
           "iteration"
         ]
+      },
+      "Abort": {
+        "type": "object",
+        "description": "Information about an abort event in a streamed response",
+        "properties": {
+          "reason": {
+            "description": "The abort reason if available"
+          },
+          "functionName": {
+            "type": "string",
+            "description": "The function or tool associated with the abort"
+          }
+        }
       },
       "CompleteEnd": {
         "type": "object",
@@ -404,6 +436,7 @@
               "length",
               "stop",
               "activity",
+              "abort",
               "error",
               "iteration"
             ],
@@ -1079,6 +1112,36 @@
                   "type",
                   "text"
                 ]
+              }
+            },
+            "required": [
+              "type",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of event",
+                "type": "string",
+                "enum": [
+                  "abort"
+                ]
+              },
+              "data": {
+                "type": "object",
+                "description": "Information about an abort event in a streamed response",
+                "properties": {
+                  "reason": {
+                    "description": "The abort reason if available"
+                  },
+                  "functionName": {
+                    "type": "string",
+                    "description": "The function or tool associated with the abort"
+                  }
+                },
+                "$$ref": "#/components/schemas/Abort"
               }
             },
             "required": [
@@ -7392,6 +7455,7 @@
                             "length",
                             "stop",
                             "activity",
+                            "abort",
                             "error",
                             "iteration"
                           ],
@@ -7461,6 +7525,7 @@
                                     "length",
                                     "stop",
                                     "activity",
+                                    "abort",
                                     "error",
                                     "iteration"
                                   ],
@@ -7621,6 +7686,36 @@
                                 "type",
                                 "text"
                               ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "description": "The type of event",
+                              "type": "string",
+                              "enum": [
+                                "abort"
+                              ]
+                            },
+                            "data": {
+                              "type": "object",
+                              "description": "Information about an abort event in a streamed response",
+                              "properties": {
+                                "reason": {
+                                  "description": "The abort reason if available"
+                                },
+                                "functionName": {
+                                  "type": "string",
+                                  "description": "The function or tool associated with the abort"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Abort"
                             }
                           },
                           "required": [
@@ -10214,6 +10309,36 @@
                               "description": "The type of event",
                               "type": "string",
                               "enum": [
+                                "abort"
+                              ]
+                            },
+                            "data": {
+                              "type": "object",
+                              "description": "Information about an abort event in a streamed response",
+                              "properties": {
+                                "reason": {
+                                  "description": "The abort reason if available"
+                                },
+                                "functionName": {
+                                  "type": "string",
+                                  "description": "The function or tool associated with the abort"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Abort"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "description": "The type of event",
+                              "type": "string",
+                              "enum": [
                                 "completeBegin"
                               ]
                             },
@@ -10978,6 +11103,36 @@
                                 "type",
                                 "text"
                               ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "description": "The type of event",
+                              "type": "string",
+                              "enum": [
+                                "abort"
+                              ]
+                            },
+                            "data": {
+                              "type": "object",
+                              "description": "Information about an abort event in a streamed response",
+                              "properties": {
+                                "reason": {
+                                  "description": "The abort reason if available"
+                                },
+                                "functionName": {
+                                  "type": "string",
+                                  "description": "The function or tool associated with the abort"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Abort"
                             }
                           },
                           "required": [
@@ -12029,6 +12184,7 @@
                             "length",
                             "stop",
                             "activity",
+                            "abort",
                             "error",
                             "iteration"
                           ],
@@ -12093,6 +12249,7 @@
                                     "length",
                                     "stop",
                                     "activity",
+                                    "abort",
                                     "error",
                                     "iteration"
                                   ],
@@ -12252,6 +12409,36 @@
                                 "type",
                                 "text"
                               ]
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "description": "The type of event",
+                              "type": "string",
+                              "enum": [
+                                "abort"
+                              ]
+                            },
+                            "data": {
+                              "type": "object",
+                              "description": "Information about an abort event in a streamed response",
+                              "properties": {
+                                "reason": {
+                                  "description": "The abort reason if available"
+                                },
+                                "functionName": {
+                                  "type": "string",
+                                  "description": "The function or tool associated with the abort"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Abort"
                             }
                           },
                           "required": [
@@ -28677,6 +28864,36 @@
                     "maxTime": {
                       "description": "The maximum time per trigger execution (in milliseconds)",
                       "type": "number"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The trigger integration status",
+                      "enum": [
+                        "idle",
+                        "running",
+                        "canceled"
+                      ],
+                      "$$ref": "#/components/schemas/TriggerIntegrationStatus"
+                    },
+                    "outcome": {
+                      "type": "string",
+                      "description": "The trigger integration outcome",
+                      "enum": [
+                        "pending",
+                        "success",
+                        "failure"
+                      ],
+                      "$$ref": "#/components/schemas/TriggerIntegrationOutcome"
+                    },
+                    "lastTriggerAt": {
+                      "description": "The timestamp (ms) of the last trigger execution",
+                      "type": "number",
+                      "nullable": true
+                    },
+                    "nextTriggerAt": {
+                      "description": "The timestamp (ms) of the next scheduled trigger execution",
+                      "type": "number",
+                      "nullable": true
                     }
                   },
                   "required": [
@@ -29227,6 +29444,36 @@
                           "maxTime": {
                             "description": "The maximum time per trigger execution (in milliseconds)",
                             "type": "number"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "The trigger integration status",
+                            "enum": [
+                              "idle",
+                              "running",
+                              "canceled"
+                            ],
+                            "$$ref": "#/components/schemas/TriggerIntegrationStatus"
+                          },
+                          "outcome": {
+                            "type": "string",
+                            "description": "The trigger integration outcome",
+                            "enum": [
+                              "pending",
+                              "success",
+                              "failure"
+                            ],
+                            "$$ref": "#/components/schemas/TriggerIntegrationOutcome"
+                          },
+                          "lastTriggerAt": {
+                            "description": "The timestamp (ms) of the last trigger execution",
+                            "type": "number",
+                            "nullable": true
+                          },
+                          "nextTriggerAt": {
+                            "description": "The timestamp (ms) of the next scheduled trigger execution",
+                            "type": "number",
+                            "nullable": true
                           }
                         },
                         "required": [
@@ -29323,6 +29570,36 @@
                             "maxTime": {
                               "description": "The maximum time per trigger execution (in milliseconds)",
                               "type": "number"
+                            },
+                            "status": {
+                              "type": "string",
+                              "description": "The trigger integration status",
+                              "enum": [
+                                "idle",
+                                "running",
+                                "canceled"
+                              ],
+                              "$$ref": "#/components/schemas/TriggerIntegrationStatus"
+                            },
+                            "outcome": {
+                              "type": "string",
+                              "description": "The trigger integration outcome",
+                              "enum": [
+                                "pending",
+                                "success",
+                                "failure"
+                              ],
+                              "$$ref": "#/components/schemas/TriggerIntegrationOutcome"
+                            },
+                            "lastTriggerAt": {
+                              "description": "The timestamp (ms) of the last trigger execution",
+                              "type": "number",
+                              "nullable": true
+                            },
+                            "nextTriggerAt": {
+                              "description": "The timestamp (ms) of the next scheduled trigger execution",
+                              "type": "number",
+                              "nullable": true
                             }
                           },
                           "$$ref": "#/paths/~1integration~1trigger~1list/get/responses/200/content/application~1json/schema/properties/items/items",
@@ -42732,6 +43009,36 @@
                               "description": "The type of event",
                               "type": "string",
                               "enum": [
+                                "abort"
+                              ]
+                            },
+                            "data": {
+                              "type": "object",
+                              "description": "Information about an abort event in a streamed response",
+                              "properties": {
+                                "reason": {
+                                  "description": "The abort reason if available"
+                                },
+                                "functionName": {
+                                  "type": "string",
+                                  "description": "The function or tool associated with the abort"
+                                }
+                              },
+                              "$$ref": "#/components/schemas/Abort"
+                            }
+                          },
+                          "required": [
+                            "type",
+                            "data"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "description": "The type of event",
+                              "type": "string",
+                              "enum": [
                                 "completeBegin"
                               ]
                             },
@@ -46449,6 +46756,14 @@
                       "type": "string",
                       "description": "The schedule of the task"
                     },
+                    "maxIterations": {
+                      "description": "The maximum number of iterations per task execution",
+                      "type": "number"
+                    },
+                    "maxTime": {
+                      "description": "The maximum time per task execution (in milliseconds)",
+                      "type": "number"
+                    },
                     "status": {
                       "type": "string",
                       "description": "The task execution status",
@@ -46469,13 +46784,15 @@
                       ],
                       "$$ref": "#/components/schemas/TaskOutcome"
                     },
-                    "maxIterations": {
-                      "description": "The maximum number of iterations per task execution",
-                      "type": "number"
+                    "lastRunAt": {
+                      "description": "The timestamp (ms) of the last task execution",
+                      "type": "number",
+                      "nullable": true
                     },
-                    "maxTime": {
-                      "description": "The maximum time per task execution (in milliseconds)",
-                      "type": "number"
+                    "nextRunAt": {
+                      "description": "The timestamp (ms) of the next scheduled task execution",
+                      "type": "number",
+                      "nullable": true
                     }
                   },
                   "required": [
@@ -47177,6 +47494,14 @@
                             "type": "string",
                             "description": "The schedule of the task"
                           },
+                          "maxIterations": {
+                            "description": "The maximum number of iterations per task execution",
+                            "type": "number"
+                          },
+                          "maxTime": {
+                            "description": "The maximum time per task execution (in milliseconds)",
+                            "type": "number"
+                          },
                           "status": {
                             "type": "string",
                             "description": "The task execution status",
@@ -47197,13 +47522,15 @@
                             ],
                             "$$ref": "#/components/schemas/TaskOutcome"
                           },
-                          "maxIterations": {
-                            "description": "The maximum number of iterations per task execution",
-                            "type": "number"
+                          "lastRunAt": {
+                            "description": "The timestamp (ms) of the last task execution",
+                            "type": "number",
+                            "nullable": true
                           },
-                          "maxTime": {
-                            "description": "The maximum time per task execution (in milliseconds)",
-                            "type": "number"
+                          "nextRunAt": {
+                            "description": "The timestamp (ms) of the next scheduled task execution",
+                            "type": "number",
+                            "nullable": true
                           }
                         },
                         "required": [
@@ -47279,6 +47606,14 @@
                               "type": "string",
                               "description": "The schedule of the task"
                             },
+                            "maxIterations": {
+                              "description": "The maximum number of iterations per task execution",
+                              "type": "number"
+                            },
+                            "maxTime": {
+                              "description": "The maximum time per task execution (in milliseconds)",
+                              "type": "number"
+                            },
                             "status": {
                               "type": "string",
                               "description": "The task execution status",
@@ -47299,13 +47634,15 @@
                               ],
                               "$$ref": "#/components/schemas/TaskOutcome"
                             },
-                            "maxIterations": {
-                              "description": "The maximum number of iterations per task execution",
-                              "type": "number"
+                            "lastRunAt": {
+                              "description": "The timestamp (ms) of the last task execution",
+                              "type": "number",
+                              "nullable": true
                             },
-                            "maxTime": {
-                              "description": "The maximum time per task execution (in milliseconds)",
-                              "type": "number"
+                            "nextRunAt": {
+                              "description": "The timestamp (ms) of the next scheduled task execution",
+                              "type": "number",
+                              "nullable": true
                             }
                           },
                           "$$ref": "#/paths/~1task~1list/get/responses/200/content/application~1json/schema/properties/items/items",
