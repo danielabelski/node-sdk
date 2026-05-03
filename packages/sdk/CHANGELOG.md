@@ -1,5 +1,12 @@
 # @chatbotkit/sdk
 
+## 1.34.0
+
+### Minor Changes
+
+- 57291ae: Updated apis and types.
+- 57291ae: Re-generated types and added abort behaviour handling in the agent sdk.
+
 ## 1.33.0
 
 ### Minor Changes

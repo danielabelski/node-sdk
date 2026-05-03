@@ -1,5 +1,18 @@
 # @chatbotkit/cli
 
+## 1.34.0
+
+### Minor Changes
+
+- 57291ae: Re-generated types and added abort behaviour handling in the agent sdk.
+
+### Patch Changes
+
+- Updated dependencies [57291ae]
+- Updated dependencies [57291ae]
+  - @chatbotkit/sdk@1.34.0
+  - @chatbotkit/agent@1.34.0
+
 ## 1.33.0
 
 ### Patch Changes
