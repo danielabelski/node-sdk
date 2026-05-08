@@ -204,6 +204,23 @@ export const FileResourceConfigSchema = BasicResourceConfigSchema.extend({
 })
 
 /**
+ * The schema for a space resource configuration.
+ *
+ * @type {ResourceConfigSchemaFor<'space', import('@chatbotkit/sdk/space/v1').SpaceCreateRequest>}
+ */
+export const SpaceResourceConfigSchema = BasicResourceConfigSchema.extend({
+  type: z.literal('space'),
+  properties: z.object({
+    alias: z.string().optional(),
+    name: z.string().optional(),
+    description: z.string().optional(),
+    meta: z.record(z.unknown()).optional(),
+    blueprintId: z.string().optional(),
+    contactId: z.string().optional(),
+  }),
+})
+
+/**
  * The schema for a secret resource configuration.
  *
  * @type {ResourceConfigSchemaFor<'secret', import('@chatbotkit/sdk/secret/v1').SecretCreateRequest>}
@@ -240,6 +257,27 @@ export const SkillsetResourceConfigSchema = BasicResourceConfigSchema.extend({
     meta: z.record(z.unknown()).optional(),
     blueprintId: z.string().optional(),
     visibility: z.enum(['private', 'protected', 'public']).optional(),
+  }),
+})
+
+/**
+ * The schema for a task resource configuration.
+ *
+ * @type {ResourceConfigSchemaFor<'task', import('@chatbotkit/sdk/task/v1').TaskCreateRequest>}
+ */
+export const TaskResourceConfigSchema = BasicResourceConfigSchema.extend({
+  type: z.literal('task'),
+  properties: z.object({
+    name: z.string().optional(),
+    description: z.string().optional(),
+    meta: z.record(z.unknown()).optional(),
+    contactId: z.string().optional(),
+    botId: z.string().optional(),
+    schedule: z.string().optional(),
+    timezone: z.string().nullable().optional(),
+    sessionDuration: z.number().optional(),
+    maxIterations: z.number().optional(),
+    maxTime: z.number().optional(),
   }),
 })
 
@@ -499,6 +537,7 @@ export const TriggerIntegrationResourceConfigSchema =
           'monthly',
         ])
         .optional(),
+      timezone: z.string().nullable().optional(),
       sessionDuration: z.number().optional(),
     }),
   })
@@ -587,8 +626,10 @@ export const ResourceConfigSchema = z.union([
   BotResourceConfigSchema,
   DatasetResourceConfigSchema,
   FileResourceConfigSchema,
+  SpaceResourceConfigSchema,
   SecretResourceConfigSchema,
   SkillsetResourceConfigSchema,
+  TaskResourceConfigSchema,
   WidgetIntegrationResourceConfigSchema,
   SitemapIntegrationResourceConfigSchema,
   SlackIntegrationResourceConfigSchema,
@@ -798,6 +839,19 @@ export class FileResource extends Resource {
 }
 
 /**
+ * Represents a space resource.
+ */
+export class SpaceResource extends Resource {
+  /**
+   * @override
+   * @returns {import('@chatbotkit/sdk').SpaceClient}
+   */
+  get client() {
+    return this.baseClient.space
+  }
+}
+
+/**
  * Represents a secret resource.
  */
 export class SecretResource extends Resource {
@@ -820,6 +874,19 @@ export class SkillsetResource extends Resource {
    */
   get client() {
     return this.baseClient.skillset
+  }
+}
+
+/**
+ * Represents a task resource.
+ */
+export class TaskResource extends Resource {
+  /**
+   * @override
+   * @returns {import('@chatbotkit/sdk/task').TaskClient}
+   */
+  get client() {
+    return this.baseClient.task
   }
 }
 
@@ -1030,7 +1097,7 @@ export class Solution {
   /**
    * Get the resources.
    *
-   * @returns {(BlueprintResource|BotResource|DatasetResource|FileResource|SecretResource|SkillsetResource|WidgetIntegrationResource|SitemapIntegrationResource|SlackIntegrationResource|DiscordIntegrationResource|TelegramIntegrationResource|WhatsAppIntegrationResource|MessengerIntegrationResource|NotionIntegrationResource|EmailIntegrationResource|TriggerIntegrationResource|SupportIntegrationResource|ExtractIntegrationResource|McpServerIntegrationResource|TwilioIntegrationResource)[]}
+   * @returns {(BlueprintResource|BotResource|DatasetResource|FileResource|SpaceResource|SecretResource|SkillsetResource|TaskResource|WidgetIntegrationResource|SitemapIntegrationResource|SlackIntegrationResource|DiscordIntegrationResource|TelegramIntegrationResource|WhatsAppIntegrationResource|MessengerIntegrationResource|NotionIntegrationResource|EmailIntegrationResource|TriggerIntegrationResource|SupportIntegrationResource|ExtractIntegrationResource|McpServerIntegrationResource|TwilioIntegrationResource)[]}
    */
   get resources() {
     return this.config.resources.map((resource) => {
@@ -1042,10 +1109,14 @@ export class Solution {
         return new DatasetResource(resource)
       } else if (resource.type === 'file') {
         return new FileResource(resource)
+      } else if (resource.type === 'space') {
+        return new SpaceResource(resource)
       } else if (resource.type === 'secret') {
         return new SecretResource(resource)
       } else if (resource.type === 'skillset') {
         return new SkillsetResource(resource)
+      } else if (resource.type === 'task') {
+        return new TaskResource(resource)
       } else if (resource.type === 'widgetIntegration') {
         return new WidgetIntegrationResource(resource)
       } else if (resource.type === 'sitemapIntegration') {
@@ -1149,6 +1220,22 @@ export class Solution {
   }
 
   /**
+   * @returns {SpaceResource[]}
+   */
+  get spaces() {
+    return /** @type {SpaceResource[]} */ (
+      this.resources.filter((resource) => resource instanceof SpaceResource)
+    )
+  }
+
+  /**
+   * @returns {{[key: string]: SpaceResource|undefined}}
+   */
+  get space() {
+    return getArrayBackedObject(this.spaces)
+  }
+
+  /**
    * @returns {SecretResource[]}
    */
   get secrets() {
@@ -1178,6 +1265,22 @@ export class Solution {
    */
   get skillset() {
     return getArrayBackedObject(this.skillsets)
+  }
+
+  /**
+   * @returns {TaskResource[]}
+   */
+  get tasks() {
+    return /** @type {TaskResource[]} */ (
+      this.resources.filter((resource) => resource instanceof TaskResource)
+    )
+  }
+
+  /**
+   * @returns {{[key: string]: TaskResource|undefined}}
+   */
+  get task() {
+    return getArrayBackedObject(this.tasks)
   }
 
   /**
