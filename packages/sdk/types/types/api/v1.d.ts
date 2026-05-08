@@ -84,6 +84,31 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/task/{taskId}/subscribe": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Subscribe to task workflow events
+         * @description Subscribe to real-time task workflow events. The stream currently
+         *     includes operation begin and operation end events emitted by the
+         *     task's conversation engine while a task execution is running. The
+         *     response uses the same streaming envelope shape as conversation
+         *     completion endpoints: each line is an event with a `type` and `data`.
+         *
+         */
+        post: operations["subscribeTaskWorkflowEvents"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/blueprint/{blueprintId}/clone": {
         parameters: {
             query?: never;
@@ -566,6 +591,23 @@ export interface paths {
         put?: never;
         /** Search memories for a specific contact */
         post: operations["searchContactMemory"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/contact/{contactId}/rating/list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List contact ratings */
+        get: operations["listContactRatings"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3126,23 +3168,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/integration/trigger/{triggerIntegrationId}/cancel": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Cancel a running Trigger integration */
-        post: operations["cancelTriggerIntegration"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/integration/trigger/{triggerIntegrationId}/delete": {
         parameters: {
             query?: never;
@@ -3154,40 +3179,6 @@ export interface paths {
         put?: never;
         /** Delete Trigger integration */
         post: operations["deleteTriggerIntegration"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/integration/trigger/{triggerIntegrationId}/execution/{triggerExecutionId}/cancel": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Cancel a Trigger integration execution */
-        post: operations["cancelTriggerIntegrationExecution"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/integration/trigger/{triggerIntegrationId}/execution/list": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** List Trigger integration executions */
-        get: operations["listTriggerIntegrationExecutions"];
-        put?: never;
-        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -5556,16 +5547,6 @@ export interface components {
          */
         TaskOutcome: "pending" | "success" | "failure";
         /**
-         * @description The trigger integration status
-         * @enum {string}
-         */
-        TriggerIntegrationStatus: "idle" | "running" | "canceled";
-        /**
-         * @description The trigger integration outcome
-         * @enum {string}
-         */
-        TriggerIntegrationOutcome: "pending" | "success" | "failure";
-        /**
          * @description The blueprint visibility
          * @enum {string}
          */
@@ -6227,6 +6208,52 @@ export interface operations {
                             createdAt: number;
                             /** @description The timestamp (ms) when the instance was updated */
                             updatedAt: number;
+                        };
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    subscribeTaskWorkflowEvents: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                taskId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description Number of recent workflow events to replay before live events. */
+                    historyLength?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description Successfully subscribed to task workflow events */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/jsonl": {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "operationBegin" | "operationEnd";
+                        /** @description The task workflow operation event data */
+                        data: {
+                            [key: string]: unknown;
                         };
                     };
                 };
@@ -7734,6 +7761,106 @@ export interface operations {
             };
         };
     };
+    listContactRatings: {
+        parameters: {
+            query?: {
+                cursor?: string;
+                order?: "asc" | "desc";
+                take?: number;
+            };
+            header?: never;
+            path: {
+                contactId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The list of ratings was retrieved successfully */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        items: {
+                            /** @description The associated name */
+                            name?: string;
+                            /** @description The associated description */
+                            description?: string;
+                            /** @description Meta data information */
+                            meta?: {
+                                [key: string]: unknown;
+                            };
+                            /** @description The instance ID */
+                            id: string;
+                            /** @description The timestamp (ms) when the instance was created */
+                            createdAt: number;
+                            /** @description The timestamp (ms) when the instance was updated */
+                            updatedAt: number;
+                            /** @description The contact id assigned to this rating */
+                            contactId?: string;
+                            /** @description The bot id assigned to this rating */
+                            botId?: string;
+                            /** @description The conversation id assigned to this rating */
+                            conversationId?: string;
+                            /** @description The message id assigned to this rating */
+                            messageId?: string;
+                            /** @description The rating value */
+                            value?: number;
+                            /** @description The reason for the rating */
+                            reason?: string;
+                        }[];
+                        /** @description Cursor for fetching the next page */
+                        cursor: string;
+                    };
+                    "application/jsonl": {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "item";
+                        /** @description Instance list properties */
+                        data: {
+                            /** @description The associated name */
+                            name?: string;
+                            /** @description The associated description */
+                            description?: string;
+                            /** @description Meta data information */
+                            meta?: {
+                                [key: string]: unknown;
+                            };
+                            /** @description The instance ID */
+                            id: string;
+                            /** @description The timestamp (ms) when the instance was created */
+                            createdAt: number;
+                            /** @description The timestamp (ms) when the instance was updated */
+                            updatedAt: number;
+                            /** @description The contact id assigned to this rating */
+                            contactId?: string;
+                            /** @description The bot id assigned to this rating */
+                            botId?: string;
+                            /** @description The conversation id assigned to this rating */
+                            conversationId?: string;
+                            /** @description The message id assigned to this rating */
+                            messageId?: string;
+                            /** @description The rating value */
+                            value?: number;
+                            /** @description The reason for the rating */
+                            reason?: string;
+                        };
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     authenticateContactSecret: {
         parameters: {
             query?: never;
@@ -8064,6 +8191,14 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                             /**
                              * @description The task execution status
                              * @enum {string}
@@ -8074,6 +8209,10 @@ export interface operations {
                              * @enum {string}
                              */
                             outcome?: "pending" | "success" | "failure";
+                            /** @description The timestamp (ms) of the last task execution */
+                            lastRunAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled task execution */
+                            nextRunAt?: number | null;
                         }[];
                         /** @description Cursor for fetching the next page */
                         cursor: string;
@@ -8106,6 +8245,14 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                             /**
                              * @description The task execution status
                              * @enum {string}
@@ -8116,6 +8263,10 @@ export interface operations {
                              * @enum {string}
                              */
                             outcome?: "pending" | "success" | "failure";
+                            /** @description The timestamp (ms) of the last task execution */
+                            lastRunAt?: number | null;
+                            /** @description The timestamp (ms) of the next scheduled task execution */
+                            nextRunAt?: number | null;
                         };
                     };
                 };
@@ -17884,42 +18035,6 @@ export interface operations {
             };
         };
     };
-    cancelTriggerIntegration: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                triggerIntegrationId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": Record<string, never>;
-            };
-        };
-        responses: {
-            /** @description The Trigger integration was canceled successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description The ID of the canceled Trigger integration */
-                        id: string;
-                    };
-                };
-            };
-            /** @description An error response */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
     deleteTriggerIntegration: {
         parameters: {
             query?: never;
@@ -17944,155 +18059,6 @@ export interface operations {
                     "application/json": {
                         /** @description The ID of the deleted Trigger integration */
                         id: string;
-                    };
-                };
-            };
-            /** @description An error response */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    cancelTriggerIntegrationExecution: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                triggerIntegrationId: string;
-                triggerExecutionId: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": Record<string, never>;
-            };
-        };
-        responses: {
-            /** @description The Trigger integration execution was canceled successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @description The ID of the canceled Trigger integration execution */
-                        id: string;
-                        /** @description The ID of the parent Trigger integration */
-                        triggerIntegrationId: string;
-                    };
-                };
-            };
-            /** @description An error response */
-            default: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    listTriggerIntegrationExecutions: {
-        parameters: {
-            query?: {
-                cursor?: string;
-                order?: "asc" | "desc";
-                take?: number;
-                status?: "idle" | "running" | "canceled";
-                meta?: {
-                    [key: string]: string;
-                };
-            };
-            header?: never;
-            path: {
-                triggerIntegrationId: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The list of Trigger integration executions was retrieved successfully */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        items: {
-                            /** @description The associated name */
-                            name?: string;
-                            /** @description The associated description */
-                            description?: string;
-                            /** @description Meta data information */
-                            meta?: {
-                                [key: string]: unknown;
-                            };
-                            /** @description The instance ID */
-                            id: string;
-                            /** @description The timestamp (ms) when the instance was created */
-                            createdAt: number;
-                            /** @description The timestamp (ms) when the instance was updated */
-                            updatedAt: number;
-                            /** @description The trigger integration this execution belongs to */
-                            triggerIntegrationId?: string;
-                            /** @description The conversation associated with this execution */
-                            conversationId?: string;
-                            /** @description Current execution status */
-                            status?: string;
-                            /** @description Final execution outcome */
-                            outcome?: string;
-                            /** @description A summary of the execution result */
-                            summary?: string;
-                            /**
-                             * Format: date-time
-                             * @description When the execution completed
-                             */
-                            completedAt?: string;
-                        }[];
-                        /** @description Cursor for fetching the next page */
-                        cursor: string;
-                    };
-                    "application/jsonl": {
-                        /**
-                         * @description The type of event
-                         * @enum {string}
-                         */
-                        type: "item";
-                        /** @description Instance list properties */
-                        data: {
-                            /** @description The associated name */
-                            name?: string;
-                            /** @description The associated description */
-                            description?: string;
-                            /** @description Meta data information */
-                            meta?: {
-                                [key: string]: unknown;
-                            };
-                            /** @description The instance ID */
-                            id: string;
-                            /** @description The timestamp (ms) when the instance was created */
-                            createdAt: number;
-                            /** @description The timestamp (ms) when the instance was updated */
-                            updatedAt: number;
-                            /** @description The trigger integration this execution belongs to */
-                            triggerIntegrationId?: string;
-                            /** @description The conversation associated with this execution */
-                            conversationId?: string;
-                            /** @description Current execution status */
-                            status?: string;
-                            /** @description Final execution outcome */
-                            outcome?: string;
-                            /** @description A summary of the execution result */
-                            summary?: string;
-                            /**
-                             * Format: date-time
-                             * @description When the execution completed
-                             */
-                            completedAt?: string;
-                        };
                     };
                 };
             };
@@ -18146,23 +18112,11 @@ export interface operations {
                         /** @description When enabled the integration requires authentication */
                         authenticate?: boolean;
                         /** @description The schedule for the trigger integration (interval, cron expression, ISO date, or null) */
-                        triggerSchedule?: string | null;
+                        schedule?: string | null;
+                        /** @description The IANA timezone identifier used to evaluate the trigger schedule. */
+                        timezone?: string | null;
                         /** @description The session duration (in milliseconds) */
                         sessionDuration?: number;
-                        /** @description The maximum number of iterations per trigger execution */
-                        maxIterations?: number;
-                        /** @description The maximum time per trigger execution (in milliseconds) */
-                        maxTime?: number;
-                        /**
-                         * @description The trigger integration status
-                         * @enum {string}
-                         */
-                        status?: "idle" | "running" | "canceled";
-                        /**
-                         * @description The trigger integration outcome
-                         * @enum {string}
-                         */
-                        outcome?: "pending" | "success" | "failure";
                         /** @description The timestamp (ms) of the last trigger execution */
                         lastTriggerAt?: number | null;
                         /** @description The timestamp (ms) of the next scheduled trigger execution */
@@ -18278,13 +18232,14 @@ export interface operations {
                     /** @description When enabled the integration requires authentication */
                     authenticate?: boolean;
                     /** @description The schedule for the trigger integration (interval, cron expression, or ISO date) */
-                    triggerSchedule?: string | null;
+                    schedule?: string | null;
+                    /**
+                     * @description An optional IANA timezone identifier used when evaluating the trigger schedule.
+                     * @example America/New_York
+                     */
+                    timezone?: string | null;
                     /** @description The session duration (in milliseconds) */
                     sessionDuration?: number;
-                    /** @description The maximum number of iterations per trigger execution */
-                    maxIterations?: number;
-                    /** @description The maximum time per trigger execution in milliseconds */
-                    maxTime?: number;
                 };
             };
         };
@@ -18335,13 +18290,14 @@ export interface operations {
                     /** @description When enabled the integration requires authentication */
                     authenticate?: boolean;
                     /** @description The schedule for the trigger integration (interval, cron expression, or ISO date) */
-                    triggerSchedule?: string | null;
+                    schedule?: string | null;
+                    /**
+                     * @description An optional IANA timezone identifier used when evaluating the trigger schedule.
+                     * @example America/New_York
+                     */
+                    timezone?: string | null;
                     /** @description The session duration (in milliseconds) */
                     sessionDuration?: number;
-                    /** @description The maximum number of iterations per trigger execution */
-                    maxIterations?: number;
-                    /** @description The maximum time per trigger execution in milliseconds */
-                    maxTime?: number;
                 };
             };
         };
@@ -18414,23 +18370,11 @@ export interface operations {
                             /** @description When enabled the integration requires authentication */
                             authenticate?: boolean;
                             /** @description The schedule for the trigger integration (interval, cron expression, ISO date, or null) */
-                            triggerSchedule?: string | null;
+                            schedule?: string | null;
+                            /** @description The IANA timezone identifier used to evaluate the trigger schedule. */
+                            timezone?: string | null;
                             /** @description The session duration (in milliseconds) */
                             sessionDuration?: number;
-                            /** @description The maximum number of iterations per trigger execution */
-                            maxIterations?: number;
-                            /** @description The maximum time per trigger execution (in milliseconds) */
-                            maxTime?: number;
-                            /**
-                             * @description The trigger integration status
-                             * @enum {string}
-                             */
-                            status?: "idle" | "running" | "canceled";
-                            /**
-                             * @description The trigger integration outcome
-                             * @enum {string}
-                             */
-                            outcome?: "pending" | "success" | "failure";
                             /** @description The timestamp (ms) of the last trigger execution */
                             lastTriggerAt?: number | null;
                             /** @description The timestamp (ms) of the next scheduled trigger execution */
@@ -18470,23 +18414,11 @@ export interface operations {
                             /** @description When enabled the integration requires authentication */
                             authenticate?: boolean;
                             /** @description The schedule for the trigger integration (interval, cron expression, ISO date, or null) */
-                            triggerSchedule?: string | null;
+                            schedule?: string | null;
+                            /** @description The IANA timezone identifier used to evaluate the trigger schedule. */
+                            timezone?: string | null;
                             /** @description The session duration (in milliseconds) */
                             sessionDuration?: number;
-                            /** @description The maximum number of iterations per trigger execution */
-                            maxIterations?: number;
-                            /** @description The maximum time per trigger execution (in milliseconds) */
-                            maxTime?: number;
-                            /**
-                             * @description The trigger integration status
-                             * @enum {string}
-                             */
-                            status?: "idle" | "running" | "canceled";
-                            /**
-                             * @description The trigger integration outcome
-                             * @enum {string}
-                             */
-                            outcome?: "pending" | "success" | "failure";
                             /** @description The timestamp (ms) of the last trigger execution */
                             lastTriggerAt?: number | null;
                             /** @description The timestamp (ms) of the next scheduled trigger execution */
@@ -26018,6 +25950,10 @@ export interface operations {
                         botId?: string;
                         /** @description The schedule of the task */
                         schedule?: string;
+                        /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                        timezone?: string | null;
+                        /** @description The session duration of the task execution (in milliseconds) */
+                        sessionDuration?: number | null;
                         /** @description The maximum number of iterations per task execution */
                         maxIterations?: number;
                         /** @description The maximum time per task execution (in milliseconds) */
@@ -26108,8 +26044,13 @@ export interface operations {
                     contactId?: string;
                     /** @description The bot associated with the task */
                     botId?: string;
-                    /** @description The schedule of the task */
+                    /** @description The schedule of the task. Cron expressions and date-based schedules are evaluated in the provided timezone when set. */
                     schedule?: string;
+                    /**
+                     * @description An optional IANA timezone identifier used when evaluating the task schedule.
+                     * @example America/New_York
+                     */
+                    timezone?: string | null;
                     /** @description The session duration of the Widget integration */
                     sessionDuration?: number;
                     /** @description The maximum number of iterations per task execution */
@@ -26163,8 +26104,13 @@ export interface operations {
                     contactId?: string;
                     /** @description The bot associated with the task */
                     botId?: string;
-                    /** @description The schedule of the task */
+                    /** @description The schedule of the task. Cron expressions and date-based schedules are evaluated in the provided timezone when set. */
                     schedule?: string;
+                    /**
+                     * @description An optional IANA timezone identifier used when evaluating the task schedule.
+                     * @example America/New_York
+                     */
+                    timezone?: string | null;
                     /** @description The session duration of the Widget integration */
                     sessionDuration?: number;
                     /** @description The maximum number of iterations per task execution */
@@ -26240,6 +26186,14 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                         }[];
                         /** @description Cursor for fetching the next page */
                         cursor: string;
@@ -26272,6 +26226,14 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
+                            /** @description The maximum number of iterations per task execution */
+                            maxIterations?: number;
+                            /** @description The maximum time per task execution (in milliseconds) */
+                            maxTime?: number;
                         };
                     };
                     "text/csv": string;
@@ -26333,6 +26295,10 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
                             /** @description The maximum number of iterations per task execution */
                             maxIterations?: number;
                             /** @description The maximum time per task execution (in milliseconds) */
@@ -26383,6 +26349,10 @@ export interface operations {
                             botId?: string;
                             /** @description The schedule of the task */
                             schedule?: string;
+                            /** @description The IANA timezone identifier used to evaluate the task schedule. */
+                            timezone?: string | null;
+                            /** @description The session duration of the task execution (in milliseconds) */
+                            sessionDuration?: number | null;
                             /** @description The maximum number of iterations per task execution */
                             maxIterations?: number;
                             /** @description The maximum time per task execution (in milliseconds) */

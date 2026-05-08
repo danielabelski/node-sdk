@@ -8,7 +8,7 @@
 
 > **invokeTriggerIntegration**(`client`, `triggerId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [integration/trigger/v1.js:199](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/trigger/v1.js#L199)
+Defined in: [integration/trigger/v1.js:174](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/trigger/v1.js#L174)
 
 ## Parameters
 

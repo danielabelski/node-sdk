@@ -10,10 +10,6 @@
 
 - [ChatBotKitClient](type-aliases/ChatBotKitClient.md)
 - [ResponsePromise](type-aliases/ResponsePromise.md)
-- [TriggerIntegrationCancelRequest](type-aliases/TriggerIntegrationCancelRequest.md)
-- [TriggerIntegrationCancelRequestBody](type-aliases/TriggerIntegrationCancelRequestBody.md)
-- [TriggerIntegrationCancelResponse](type-aliases/TriggerIntegrationCancelResponse.md)
-- [TriggerIntegrationCancelResponseBody](type-aliases/TriggerIntegrationCancelResponseBody.md)
 - [TriggerIntegrationCreateRequest](type-aliases/TriggerIntegrationCreateRequest.md)
 - [TriggerIntegrationCreateRequestBody](type-aliases/TriggerIntegrationCreateRequestBody.md)
 - [TriggerIntegrationCreateResponse](type-aliases/TriggerIntegrationCreateResponse.md)
@@ -41,7 +37,6 @@
 
 ## Functions
 
-- [cancelTriggerIntegration](functions/cancelTriggerIntegration.md)
 - [createTriggerIntegration](functions/createTriggerIntegration.md)
 - [deleteTriggerIntegration](functions/deleteTriggerIntegration.md)
 - [fetchTriggerIntegration](functions/fetchTriggerIntegration.md)

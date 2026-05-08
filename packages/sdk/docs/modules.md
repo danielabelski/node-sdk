@@ -74,8 +74,6 @@
 - [integration/telegram](integration/telegram/README.md)
 - [integration/telegram/v1](integration/telegram/v1/README.md)
 - [integration/trigger](integration/trigger/README.md)
-- [integration/trigger/execution](integration/trigger/execution/README.md)
-- [integration/trigger/execution/v1](integration/trigger/execution/v1/README.md)
 - [integration/trigger/v1](integration/trigger/v1/README.md)
 - [integration/twilio](integration/twilio/README.md)
 - [integration/twilio/v1](integration/twilio/v1/README.md)

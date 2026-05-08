@@ -68,6 +68,14 @@ export class TaskClient extends ChatBotKitClient {
      * @returns {Promise<import('./v1.js').TaskTriggerResponse>}
      */
     trigger(taskId: string): Promise<import("./v1.js").TaskTriggerResponse>;
+    /**
+     * Subscribes to task workflow events.
+     *
+     * @param {string} taskId
+     * @param {import('./v1.js').TaskSubscribeRequest} [request]
+     * @returns {ResponsePromise<never,import('./v1.js').TaskSubscribeStreamType>}
+     */
+    subscribe(taskId: string, request?: import("./v1.js").TaskSubscribeRequest): ResponsePromise<never, import("./v1.js").TaskSubscribeStreamType>;
 }
 export default TaskClient;
 export type ResponsePromise<T, U> = import("../client.js").ResponsePromise<T, U>;
