@@ -6,7 +6,7 @@
 
 # Class: TaskClient
 
-Defined in: [task/index.js:23](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L23)
+Defined in: [task/index.js:24](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L24)
 
 Task client.
 
@@ -20,7 +20,7 @@ Task client.
 
 > **new TaskClient**(`options`): `TaskClient`
 
-Defined in: [task/index.js:27](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L27)
+Defined in: [task/index.js:28](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L28)
 
 #### Parameters
 
@@ -42,7 +42,7 @@ Defined in: [task/index.js:27](https://github.com/chatbotkit/node-sdk/blob/main/
 
 > **execution**: [`TaskExecutionClient`](../execution/classes/TaskExecutionClient.md)
 
-Defined in: [task/index.js:33](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L33)
+Defined in: [task/index.js:34](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L34)
 
 ## Methods
 
@@ -50,7 +50,7 @@ Defined in: [task/index.js:33](https://github.com/chatbotkit/node-sdk/blob/main/
 
 > **cancel**(`taskId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [task/index.js:103](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L103)
+Defined in: [task/index.js:104](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L104)
 
 Cancels a task.
 
@@ -70,7 +70,7 @@ Cancels a task.
 
 > **create**(`request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [task/index.js:72](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L72)
+Defined in: [task/index.js:73](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L73)
 
 Creates a new task.
 
@@ -88,7 +88,7 @@ Creates a new task.
 
 > **delete**(`taskId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [task/index.js:93](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L93)
+Defined in: [task/index.js:94](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L94)
 
 Deletes the task.
 
@@ -108,7 +108,7 @@ Deletes the task.
 
 > **export**(`request?`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \}\>
 
-Defined in: [task/index.js:52](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L52)
+Defined in: [task/index.js:53](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L53)
 
 Exports tasks.
 
@@ -162,7 +162,7 @@ A new instance of the same client class with extended options
 
 > **fetch**(`taskId`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<\{ \}, `never`\>
 
-Defined in: [task/index.js:62](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L62)
+Defined in: [task/index.js:63](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L63)
 
 Fetches a task.
 
@@ -182,7 +182,7 @@ Fetches a task.
 
 > **list**(`request?`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<\{ \}, \{ \}\>
 
-Defined in: [task/index.js:42](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L42)
+Defined in: [task/index.js:43](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L43)
 
 Retrieves a list of all tasks.
 
@@ -198,11 +198,33 @@ Retrieves a list of all tasks.
 
 ***
 
+### subscribe()
+
+> **subscribe**(`taskId`, `request?`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \}\>
+
+Defined in: [task/index.js:125](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L125)
+
+Subscribes to task workflow events.
+
+#### Parameters
+
+##### taskId
+
+`string`
+
+##### request?
+
+#### Returns
+
+[`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \}\>
+
+***
+
 ### trigger()
 
 > **trigger**(`taskId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [task/index.js:113](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L113)
+Defined in: [task/index.js:114](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L114)
 
 Triggers a task.
 
@@ -222,7 +244,7 @@ Triggers a task.
 
 > **update**(`taskId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [task/index.js:83](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L83)
+Defined in: [task/index.js:84](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L84)
 
 Updates a task.
 

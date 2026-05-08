@@ -8,7 +8,7 @@
 
 > **TaskExportRequest**\<\> = `object`
 
-Defined in: [task/v1.js:190](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/v1.js#L190)
+Defined in: [task/v1.js:218](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/v1.js#L218)
 
 ## Type Parameters
 

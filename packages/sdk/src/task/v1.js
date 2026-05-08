@@ -183,6 +183,34 @@ export async function triggerTask(client, taskId) {
 }
 
 /**
+ * @typedef {import('../types/api/v1.js').operations['subscribeTaskWorkflowEvents']['requestBody']['content']['application/json']} TaskSubscribeRequestBody
+ *
+ * @typedef {TaskSubscribeRequestBody} TaskSubscribeRequest
+ *
+ * @typedef {import('../types/api/v1.js').operations['subscribeTaskWorkflowEvents']['responses']['200']['content']['application/jsonl']} TaskSubscribeResponseBody
+ *
+ * @typedef {TaskSubscribeResponseBody} TaskSubscribeStreamType
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} taskId
+ * @param {TaskSubscribeRequest} [request]
+ * @returns {ResponsePromise<never,TaskSubscribeStreamType>}
+ */
+export function subscribeTask(client, taskId, request) {
+  const url = `/api/v1/task/${taskId}/subscribe`
+
+  /** @type {ResponsePromise<never,TaskSubscribeStreamType>} */
+  const response = client.clientFetch(url, {
+    /** @type {TaskSubscribeRequestBody} */
+    record: request || {},
+
+    endpoint: '/api/v1/task/{taskId}/subscribe',
+  })
+
+  return response
+}
+
+/**
  * @typedef {{
  *   cursor?: string,
  *   order?: 'desc'|'asc',

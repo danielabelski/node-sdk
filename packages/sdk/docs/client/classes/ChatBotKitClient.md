@@ -44,7 +44,6 @@ Defined in: [client.js:302](https://github.com/chatbotkit/node-sdk/blob/main/sdk
 - [`SupportIntegrationClient`](../../integration/support/classes/SupportIntegrationClient.md)
 - [`TeamsIntegrationClient`](../../integration/teams/classes/TeamsIntegrationClient.md)
 - [`TelegramIntegrationClient`](../../integration/telegram/classes/TelegramIntegrationClient.md)
-- [`TriggerIntegrationExecutionClient`](../../integration/trigger/execution/classes/TriggerIntegrationExecutionClient.md)
 - [`TriggerIntegrationClient`](../../integration/trigger/classes/TriggerIntegrationClient.md)
 - [`TwilioIntegrationClient`](../../integration/twilio/classes/TwilioIntegrationClient.md)
 - [`WhatsAppIntegrationClient`](../../integration/whatsapp/classes/WhatsAppIntegrationClient.md)

@@ -73,8 +73,6 @@
     "./src/integration/teams/v1.js",
     "./src/integration/telegram/index.js",
     "./src/integration/telegram/v1.js",
-    "./src/integration/trigger/execution/index.js",
-    "./src/integration/trigger/execution/v1.js",
     "./src/integration/trigger/index.js",
     "./src/integration/trigger/v1.js",
     "./src/integration/twilio/index.js",

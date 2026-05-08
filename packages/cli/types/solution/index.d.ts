@@ -409,10 +409,8 @@ export const ResourceConfigSchema: z.ZodUnion<[ResourceConfigSchemaFor<"blueprin
     blueprintId?: string;
     botId?: string;
     authenticate?: boolean;
-    triggerSchedule?: string | null;
+    schedule?: string | null;
     sessionDuration?: number;
-    maxIterations?: number;
-    maxTime?: number;
 }>, ResourceConfigSchemaFor<"supportIntegration", {
     name?: string;
     description?: string;
@@ -673,10 +671,8 @@ export const SolutionConfigSchema: z.ZodObject<{
         blueprintId?: string;
         botId?: string;
         authenticate?: boolean;
-        triggerSchedule?: string | null;
+        schedule?: string | null;
         sessionDuration?: number;
-        maxIterations?: number;
-        maxTime?: number;
     }>, ResourceConfigSchemaFor<"supportIntegration", {
         name?: string;
         description?: string;
@@ -1020,7 +1016,6 @@ export const SolutionConfigSchema: z.ZodObject<{
         properties: {
             name?: string | undefined;
             botId?: string | undefined;
-            maxIterations?: number | undefined;
             description?: string | undefined;
             meta?: {
                 [key: string]: unknown;
@@ -1028,8 +1023,7 @@ export const SolutionConfigSchema: z.ZodObject<{
             blueprintId?: string | undefined;
             sessionDuration?: number | undefined;
             authenticate?: boolean | undefined;
-            triggerSchedule?: string | null | undefined;
-            maxTime?: number | undefined;
+            schedule?: string | null | undefined;
         };
         slug?: string | undefined;
         id?: string | undefined;
@@ -1396,7 +1390,6 @@ export const SolutionConfigSchema: z.ZodObject<{
         properties: {
             name?: string | undefined;
             botId?: string | undefined;
-            maxIterations?: number | undefined;
             description?: string | undefined;
             meta?: {
                 [key: string]: unknown;
@@ -1404,8 +1397,7 @@ export const SolutionConfigSchema: z.ZodObject<{
             blueprintId?: string | undefined;
             sessionDuration?: number | undefined;
             authenticate?: boolean | undefined;
-            triggerSchedule?: string | null | undefined;
-            maxTime?: number | undefined;
+            schedule?: string | null | undefined;
         };
         slug?: string | undefined;
         id?: string | undefined;
@@ -1783,7 +1775,6 @@ export class Resource {
         properties: {
             name?: string | undefined;
             botId?: string | undefined;
-            maxIterations?: number | undefined;
             description?: string | undefined;
             meta?: {
                 [key: string]: unknown;
@@ -1791,8 +1782,7 @@ export class Resource {
             blueprintId?: string | undefined;
             sessionDuration?: number | undefined;
             authenticate?: boolean | undefined;
-            triggerSchedule?: string | null | undefined;
-            maxTime?: number | undefined;
+            schedule?: string | null | undefined;
         };
         slug?: string | undefined;
         id?: string | undefined;
@@ -2432,7 +2422,6 @@ export class Solution {
             properties: {
                 name?: string | undefined;
                 botId?: string | undefined;
-                maxIterations?: number | undefined;
                 description?: string | undefined;
                 meta?: {
                     [key: string]: unknown;
@@ -2440,8 +2429,7 @@ export class Solution {
                 blueprintId?: string | undefined;
                 sessionDuration?: number | undefined;
                 authenticate?: boolean | undefined;
-                triggerSchedule?: string | null | undefined;
-                maxTime?: number | undefined;
+                schedule?: string | null | undefined;
             };
             slug?: string | undefined;
             id?: string | undefined;

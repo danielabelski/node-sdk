@@ -104,6 +104,21 @@ export function cancelTask(client: ChatBotKitClient, taskId: string): Promise<Ta
  */
 export function triggerTask(client: ChatBotKitClient, taskId: string): Promise<TaskTriggerResponse>;
 /**
+ * @typedef {import('../types/api/v1.js').operations['subscribeTaskWorkflowEvents']['requestBody']['content']['application/json']} TaskSubscribeRequestBody
+ *
+ * @typedef {TaskSubscribeRequestBody} TaskSubscribeRequest
+ *
+ * @typedef {import('../types/api/v1.js').operations['subscribeTaskWorkflowEvents']['responses']['200']['content']['application/jsonl']} TaskSubscribeResponseBody
+ *
+ * @typedef {TaskSubscribeResponseBody} TaskSubscribeStreamType
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} taskId
+ * @param {TaskSubscribeRequest} [request]
+ * @returns {ResponsePromise<never,TaskSubscribeStreamType>}
+ */
+export function subscribeTask(client: ChatBotKitClient, taskId: string, request?: TaskSubscribeRequest): ResponsePromise<never, TaskSubscribeStreamType>;
+/**
  * @typedef {{
  *   cursor?: string,
  *   order?: 'desc'|'asc',
@@ -148,6 +163,10 @@ export type TaskTriggerRequestBody = import("../types/api/v1.js").operations["tr
 export type TaskTriggerRequest = TaskTriggerRequestBody;
 export type TaskTriggerResponseBody = import("../types/api/v1.js").operations["triggerTask"]["responses"]["200"]["content"]["application/json"];
 export type TaskTriggerResponse = TaskTriggerResponseBody;
+export type TaskSubscribeRequestBody = import("../types/api/v1.js").operations["subscribeTaskWorkflowEvents"]["requestBody"]["content"]["application/json"];
+export type TaskSubscribeRequest = TaskSubscribeRequestBody;
+export type TaskSubscribeResponseBody = import("../types/api/v1.js").operations["subscribeTaskWorkflowEvents"]["responses"]["200"]["content"]["application/jsonl"];
+export type TaskSubscribeStreamType = TaskSubscribeResponseBody;
 export type TaskExportRequest = {
     cursor?: string;
     order?: "desc" | "asc";

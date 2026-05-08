@@ -132,6 +132,8 @@ declare global {
         CHATBOTKIT_WARNING_LOG?: boolean;
         CHATBOTKIT_LOG_ERROR?: boolean;
         CHATBOTKIT_ERROR_LOG?: boolean;
+        CHATBOTKIT_LOG_DEBUG?: boolean;
+        CHATBOTKIT_DEBUG_LOG?: boolean;
     }
     interface HTMLElementTagNameMap {
         'chatbotkit-widget': ChatBotKitWidgetElementV2;

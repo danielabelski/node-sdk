@@ -488,7 +488,7 @@ export const TriggerIntegrationResourceConfigSchema =
       blueprintId: z.string().optional(),
       botId: z.string().optional(),
       authenticate: z.boolean().optional(),
-      triggerSchedule: z
+      schedule: z
         .enum([
           'never',
           'quarterhourly',
@@ -500,8 +500,6 @@ export const TriggerIntegrationResourceConfigSchema =
         ])
         .optional(),
       sessionDuration: z.number().optional(),
-      maxIterations: z.number().optional(),
-      maxTime: z.number().optional(),
     }),
   })
 

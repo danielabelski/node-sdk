@@ -7,6 +7,7 @@ import {
   exportTasks,
   fetchTask,
   listTasks,
+  subscribeTask,
   triggerTask,
   updateTask,
 } from './v1.js'
@@ -112,6 +113,17 @@ export class TaskClient extends ChatBotKitClient {
    */
   trigger(taskId) {
     return triggerTask(this, taskId)
+  }
+
+  /**
+   * Subscribes to task workflow events.
+   *
+   * @param {string} taskId
+   * @param {import('./v1.js').TaskSubscribeRequest} [request]
+   * @returns {ResponsePromise<never,import('./v1.js').TaskSubscribeStreamType>}
+   */
+  subscribe(taskId, request) {
+    return subscribeTask(this, taskId, request)
   }
 }
 
