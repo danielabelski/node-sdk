@@ -1,5 +1,11 @@
 # @chatbotkit/sdk
 
+## 1.35.0
+
+### Minor Changes
+
+- e0821b9: Updated types and documentation.
+
 ## 1.34.0
 
 ### Minor Changes
