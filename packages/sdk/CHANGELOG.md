@@ -1,5 +1,11 @@
 # @chatbotkit/sdk
 
+## 1.36.0
+
+### Minor Changes
+
+- b9383c8: Re-generated types and docs.
+
 ## 1.35.0
 
 ### Minor Changes
