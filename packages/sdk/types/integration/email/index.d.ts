@@ -47,6 +47,14 @@ export class EmailIntegrationClient extends ChatBotKitClient {
      * @returns {Promise<import('./v1.js').EmailIntegrationSetupResponse>}
      */
     setup(emailId: string): Promise<import("./v1.js").EmailIntegrationSetupResponse>;
+    /**
+     * Initiates a email integration conversation.
+     *
+     * @param {string} emailId
+     * @param {import('./v1.js').EmailInitiateRequest} request
+     * @returns {Promise<import('./v1.js').EmailInitiateResponse>}
+     */
+    initiate(emailId: string, request: import("./v1.js").EmailInitiateRequest): Promise<import("./v1.js").EmailInitiateResponse>;
 }
 export default EmailIntegrationClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;

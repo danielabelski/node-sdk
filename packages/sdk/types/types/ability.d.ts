@@ -226,6 +226,7 @@ export type CbkAbilityName = 'abort'
   | 'todo/manage'
   | 'todo/read'
   | 'todo/write'
+  | 'twilio/conversation/start[by-id]'
   | 'url/graphql'
   | 'url/sql'
   | 'view/describe'
@@ -1719,6 +1720,19 @@ export type TodoWriteParameters = {
   status: string
 }
 
+export type TwilioConversationStartByIdParameters = {
+ /** The ID of the Twilio integration to use */
+  twilioIntegrationId: string
+ /** The Twilio channel to use */
+  channel?: string
+ /** The Twilio sender phone number in international format */
+  from: string
+ /** The recipient phone number in international format */
+  to: string
+ /** The initial instruction to use to start the conversation */
+  text: string
+}
+
 export type UrlGraphqlParameters = {
  /** the GraphQL endpoint URL */
   endpoint: string
@@ -2860,6 +2874,11 @@ export interface CbkAbilityRegistry {
     name: 'Write Todo List'
     description: 'Replace the entire todo list with a new set of items. Always provide the complete list.'
     parameters: TodoWriteParameters
+  }
+  'twilio/conversation/start[by-id]': {
+    name: 'Start Twilio Conversation'
+    description: 'Initiates a new conversation by sending an SMS message or starting a phone call through Twilio.'
+    parameters: TwilioConversationStartByIdParameters
   }
   'url/graphql': {
     name: 'Execute GraphQL Query'

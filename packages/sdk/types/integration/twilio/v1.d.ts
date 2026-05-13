@@ -89,6 +89,21 @@ export function deleteTwilioIntegration(client: ChatBotKitClient, twilioId: stri
  * @returns {Promise<TwilioIntegrationSetupResponse>}
  */
 export function setupTwilioIntegration(client: ChatBotKitClient, twilioId: string): Promise<TwilioIntegrationSetupResponse>;
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateTwilio']['requestBody']['content']['application/json']} TwilioInitiateRequestBody
+ *
+ * @typedef {TwilioInitiateRequestBody} TwilioInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateTwilio']['responses']['200']['content']['application/json']} TwilioInitiateResponseBody
+ *
+ * @typedef {TwilioInitiateResponseBody} TwilioInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} twilioId
+ * @param {TwilioInitiateRequest} request
+ * @returns {Promise<TwilioInitiateResponse>}
+ */
+export function initiateTwilio(client: ChatBotKitClient, twilioId: string, request: TwilioInitiateRequest): Promise<TwilioInitiateResponse>;
 export type ChatBotKitClient = import("../../client.js").ChatBotKitClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;
 export type TwilioIntegrationListRequest = {
@@ -116,3 +131,7 @@ export type TwilioIntegrationSetupRequestBody = import("../../types/api/v1.js").
 export type TwilioIntegrationSetupRequest = TwilioIntegrationSetupRequestBody;
 export type TwilioIntegrationSetupResponseBody = import("../../types/api/v1.js").operations["setupTwilioIntegration"]["responses"]["200"]["content"]["application/json"];
 export type TwilioIntegrationSetupResponse = TwilioIntegrationSetupResponseBody;
+export type TwilioInitiateRequestBody = import("../../types/api/v1.js").operations["initiateTwilio"]["requestBody"]["content"]["application/json"];
+export type TwilioInitiateRequest = TwilioInitiateRequestBody;
+export type TwilioInitiateResponseBody = import("../../types/api/v1.js").operations["initiateTwilio"]["responses"]["200"]["content"]["application/json"];
+export type TwilioInitiateResponse = TwilioInitiateResponseBody;

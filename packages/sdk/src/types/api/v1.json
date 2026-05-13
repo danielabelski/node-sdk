@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "CBK API",
-    "version": "v1 (build 1778142565541)"
+    "version": "v1 (build 1778662933147)"
   },
   "servers": [
     {
@@ -1259,6 +1259,194 @@
             ]
           }
         ]
+      },
+      "TaskWorkflowStreamingResponseItem": {
+        "description": "An item in the task workflow subscription response",
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of event",
+                "type": "string",
+                "enum": [
+                  "operationBegin"
+                ]
+              },
+              "createdAt": {
+                "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                "type": "number"
+              },
+              "data": {
+                "description": "The data for the operation begin event",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The operation ID",
+                    "type": "string"
+                  },
+                  "action": {
+                    "description": "The action associated with the operation",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "The action ID",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "The action kind",
+                        "type": "string",
+                        "enum": [
+                          "dataset",
+                          "skillset",
+                          "function"
+                        ]
+                      },
+                      "name": {
+                        "description": "The action name",
+                        "type": "string"
+                      },
+                      "input": {
+                        "description": "The action input"
+                      },
+                      "justification": {
+                        "description": "The action justification",
+                        "type": "string"
+                      },
+                      "icon": {
+                        "description": "The action icon",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "action"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "createdAt",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of event",
+                "type": "string",
+                "enum": [
+                  "operationEnd"
+                ]
+              },
+              "createdAt": {
+                "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                "type": "number"
+              },
+              "data": {
+                "description": "The data for the operation end event",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The operation ID",
+                    "type": "string"
+                  },
+                  "action": {
+                    "description": "The action associated with the operation",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "description": "The action ID",
+                        "type": "string"
+                      },
+                      "kind": {
+                        "description": "The action kind",
+                        "type": "string",
+                        "enum": [
+                          "dataset",
+                          "skillset",
+                          "function"
+                        ]
+                      },
+                      "name": {
+                        "description": "The action name",
+                        "type": "string"
+                      },
+                      "input": {
+                        "description": "The action input"
+                      },
+                      "justification": {
+                        "description": "The action justification",
+                        "type": "string"
+                      },
+                      "icon": {
+                        "description": "The action icon",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "action"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "createdAt",
+              "data"
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of event",
+                "type": "string",
+                "enum": [
+                  "error"
+                ]
+              },
+              "createdAt": {
+                "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                "type": "number"
+              },
+              "data": {
+                "description": "The data for the error event",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "description": "The error code",
+                    "type": "string"
+                  },
+                  "message": {
+                    "description": "The error message",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "code",
+                  "message"
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "createdAt",
+              "data"
+            ]
+          }
+        ]
       }
     },
     "responses": {
@@ -1374,6 +1562,263 @@
           }
         },
         "__originalOperationId": "graphql",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/integration/email/{emailIntegrationId}/initiate": {
+      "post": {
+        "operationId": "initiateEmail",
+        "summary": "Initiates conversation with the email integration",
+        "tags": [
+          "Conversation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "description": "The email address to use for the conversation",
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "subject": {
+                    "description": "The subject of the email",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "The text instruction to use to initiate the conversation",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "text",
+                  "email",
+                  "subject"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The email integration was successfully initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The ID of the initiated integration",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "type": "object",
+            "description": "An error response",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "The error message"
+              },
+              "code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            },
+            "required": [
+              "message",
+              "code"
+            ],
+            "$$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "__originalOperationId": "initiateEmail",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/integration/slack/{slackIntegrationId}/initiate": {
+      "post": {
+        "operationId": "initiateSlack",
+        "summary": "Initiates conversation with the slack integration",
+        "tags": [
+          "Conversation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "description": "The Slack channel or user to send to",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "The text instruction to use to initiate the conversation",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "channel",
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The slack integration was successfully initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The ID of the initiated integration",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "type": "object",
+            "description": "An error response",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "The error message"
+              },
+              "code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            },
+            "required": [
+              "message",
+              "code"
+            ],
+            "$$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "__originalOperationId": "initiateSlack",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/integration/twilio/{twilioIntegrationId}/initiate": {
+      "post": {
+        "operationId": "initiateTwilio",
+        "summary": "Initiates conversation with the twilio integration",
+        "tags": [
+          "Conversation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "channel": {
+                    "description": "The Twilio channel to use for the conversation",
+                    "type": "string",
+                    "enum": [
+                      "sms",
+                      "call"
+                    ],
+                    "default": "sms"
+                  },
+                  "from": {
+                    "description": "The Twilio sender phone number",
+                    "type": "string"
+                  },
+                  "to": {
+                    "description": "The recipient phone number",
+                    "type": "string"
+                  },
+                  "text": {
+                    "description": "The text instruction to use to initiate the conversation",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "from",
+                  "to",
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The twilio integration was successfully initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "The ID of the initiated integration",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              }
+            }
+          },
+          "default": {
+            "type": "object",
+            "description": "An error response",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "The error message"
+              },
+              "code": {
+                "type": "string",
+                "description": "The error code"
+              }
+            },
+            "required": [
+              "message",
+              "code"
+            ],
+            "$$ref": "#/components/responses/ErrorResponse"
+          }
+        },
+        "__originalOperationId": "initiateTwilio",
         "security": [
           {
             "BearerAuth": []
@@ -1729,7 +2174,7 @@
       "post": {
         "operationId": "subscribeTaskWorkflowEvents",
         "summary": "Subscribe to task workflow events",
-        "description": "Subscribe to real-time task workflow events. The stream currently\nincludes operation begin and operation end events emitted by the\ntask's conversation engine while a task execution is running. The\nresponse uses the same streaming envelope shape as conversation\ncompletion endpoints: each line is an event with a `type` and `data`.\n",
+        "description": "Subscribe to real-time task workflow events. The stream currently\nincludes operation begin, operation end, and error events emitted by\nthe task's conversation engine while a task execution is running. The\nresponse uses the same streaming envelope shape as conversation\ncompletion endpoints: each line is an event with a `type`, `createdAt`,\nand `data`.\n",
         "tags": [
           "Task"
         ],
@@ -1768,6 +2213,7 @@
             "content": {
               "application/jsonl": {
                 "schema": {
+                  "description": "An item in the task workflow subscription response",
                   "oneOf": [
                     {
                       "type": "object",
@@ -1776,22 +2222,184 @@
                           "description": "The type of event",
                           "type": "string",
                           "enum": [
-                            "operationBegin",
-                            "operationEnd"
+                            "operationBegin"
                           ]
                         },
+                        "createdAt": {
+                          "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                          "type": "number"
+                        },
                         "data": {
-                          "description": "The task workflow operation event data",
+                          "description": "The data for the operation begin event",
                           "type": "object",
-                          "additionalProperties": true
+                          "properties": {
+                            "id": {
+                              "description": "The operation ID",
+                              "type": "string"
+                            },
+                            "action": {
+                              "description": "The action associated with the operation",
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "description": "The action ID",
+                                  "type": "string"
+                                },
+                                "kind": {
+                                  "description": "The action kind",
+                                  "type": "string",
+                                  "enum": [
+                                    "dataset",
+                                    "skillset",
+                                    "function"
+                                  ]
+                                },
+                                "name": {
+                                  "description": "The action name",
+                                  "type": "string"
+                                },
+                                "input": {
+                                  "description": "The action input"
+                                },
+                                "justification": {
+                                  "description": "The action justification",
+                                  "type": "string"
+                                },
+                                "icon": {
+                                  "description": "The action icon",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "action"
+                          ]
                         }
                       },
                       "required": [
                         "type",
+                        "createdAt",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "description": "The type of event",
+                          "type": "string",
+                          "enum": [
+                            "operationEnd"
+                          ]
+                        },
+                        "createdAt": {
+                          "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                          "type": "number"
+                        },
+                        "data": {
+                          "description": "The data for the operation end event",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "description": "The operation ID",
+                              "type": "string"
+                            },
+                            "action": {
+                              "description": "The action associated with the operation",
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "description": "The action ID",
+                                  "type": "string"
+                                },
+                                "kind": {
+                                  "description": "The action kind",
+                                  "type": "string",
+                                  "enum": [
+                                    "dataset",
+                                    "skillset",
+                                    "function"
+                                  ]
+                                },
+                                "name": {
+                                  "description": "The action name",
+                                  "type": "string"
+                                },
+                                "input": {
+                                  "description": "The action input"
+                                },
+                                "justification": {
+                                  "description": "The action justification",
+                                  "type": "string"
+                                },
+                                "icon": {
+                                  "description": "The action icon",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "id"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "action"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "createdAt",
+                        "data"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "description": "The type of event",
+                          "type": "string",
+                          "enum": [
+                            "error"
+                          ]
+                        },
+                        "createdAt": {
+                          "description": "The event creation timestamp in milliseconds since the Unix epoch",
+                          "type": "number"
+                        },
+                        "data": {
+                          "description": "The data for the error event",
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "description": "The error code",
+                              "type": "string"
+                            },
+                            "message": {
+                              "description": "The error message",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message"
+                          ]
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "createdAt",
                         "data"
                       ]
                     }
-                  ]
+                  ],
+                  "$$ref": "#/components/schemas/TaskWorkflowStreamingResponseItem"
                 }
               }
             }
@@ -29655,6 +30263,14 @@
                       "type": "string",
                       "description": "The ID of the blueprint"
                     },
+                    "accountSid": {
+                      "description": "The Twilio account SID",
+                      "type": "string"
+                    },
+                    "voice": {
+                      "description": "The voice configuration structured string",
+                      "type": "string"
+                    },
                     "contactCollection": {
                       "description": "Weather to collect contacts",
                       "type": "boolean"
@@ -29662,6 +30278,10 @@
                     "sessionDuration": {
                       "description": "The session duration (in milliseconds)",
                       "type": "number"
+                    },
+                    "allowFrom": {
+                      "description": "Newline-or-comma-separated list of allowed senders",
+                      "type": "string"
                     }
                   },
                   "required": [
@@ -29826,6 +30446,18 @@
                     "type": "string",
                     "description": "The ID of the bot this configuration is using"
                   },
+                  "accountSid": {
+                    "description": "The Twilio account SID",
+                    "type": "string"
+                  },
+                  "authToken": {
+                    "description": "The Twilio auth token",
+                    "type": "string"
+                  },
+                  "voice": {
+                    "description": "The voice configuration structured string",
+                    "type": "string"
+                  },
                   "contactCollection": {
                     "description": "Weather to collect contacts",
                     "type": "boolean"
@@ -29833,6 +30465,10 @@
                   "sessionDuration": {
                     "description": "The session duration (in milliseconds)",
                     "type": "number"
+                  },
+                  "allowFrom": {
+                    "description": "Newline-or-comma-separated list of allowed senders. Use E.164 phone numbers with or without the leading `+`. Set to `*` to allow all. Leave empty to deny all.",
+                    "type": "string"
                   }
                 }
               }
@@ -29924,6 +30560,18 @@
                     "type": "string",
                     "description": "The ID of the bot this configuration is using"
                   },
+                  "accountSid": {
+                    "description": "The Twilio account SID",
+                    "type": "string"
+                  },
+                  "authToken": {
+                    "description": "The Twilio auth token",
+                    "type": "string"
+                  },
+                  "voice": {
+                    "description": "The voice configuration structured string",
+                    "type": "string"
+                  },
                   "contactCollection": {
                     "description": "Weather to collect contacts",
                     "type": "boolean"
@@ -29931,6 +30579,10 @@
                   "sessionDuration": {
                     "description": "The session duration (in milliseconds)",
                     "type": "number"
+                  },
+                  "allowFrom": {
+                    "description": "Newline-or-comma-separated list of allowed senders. Use E.164 phone numbers with or without the leading `+`. Set to `*` to allow all. Leave empty to deny all.",
+                    "type": "string"
                   }
                 }
               }
@@ -30084,6 +30736,14 @@
                             "type": "string",
                             "description": "The ID of the blueprint"
                           },
+                          "accountSid": {
+                            "description": "The Twilio account SID",
+                            "type": "string"
+                          },
+                          "voice": {
+                            "description": "The voice configuration structured string",
+                            "type": "string"
+                          },
                           "contactCollection": {
                             "description": "Weather to collect contacts",
                             "type": "boolean"
@@ -30091,6 +30751,10 @@
                           "sessionDuration": {
                             "description": "The session duration (in milliseconds)",
                             "type": "number"
+                          },
+                          "allowFrom": {
+                            "description": "Newline-or-comma-separated list of allowed senders",
+                            "type": "string"
                           }
                         },
                         "required": [
@@ -30162,6 +30826,14 @@
                               "type": "string",
                               "description": "The ID of the blueprint"
                             },
+                            "accountSid": {
+                              "description": "The Twilio account SID",
+                              "type": "string"
+                            },
+                            "voice": {
+                              "description": "The voice configuration structured string",
+                              "type": "string"
+                            },
                             "contactCollection": {
                               "description": "Weather to collect contacts",
                               "type": "boolean"
@@ -30169,6 +30841,10 @@
                             "sessionDuration": {
                               "description": "The session duration (in milliseconds)",
                               "type": "number"
+                            },
+                            "allowFrom": {
+                              "description": "Newline-or-comma-separated list of allowed senders",
+                              "type": "string"
                             }
                           },
                           "$$ref": "#/paths/~1integration~1twilio~1list/get/responses/200/content/application~1json/schema/properties/items/items",

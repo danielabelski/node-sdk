@@ -3,6 +3,7 @@ import {
   createTwilioIntegration,
   deleteTwilioIntegration,
   fetchTwilioIntegration,
+  initiateTwilio,
   listTwilioIntegrations,
   setupTwilioIntegration,
   updateTwilioIntegration,
@@ -81,6 +82,17 @@ export class TwilioIntegrationClient extends ChatBotKitClient {
    */
   setup(twilioId) {
     return setupTwilioIntegration(this, twilioId)
+  }
+
+  /**
+   * Initiates a twilio integration conversation.
+   *
+   * @param {string} twilioId
+   * @param {import('./v1.js').TwilioInitiateRequest} request
+   * @returns {Promise<import('./v1.js').TwilioInitiateResponse>}
+   */
+  initiate(twilioId, request) {
+    return initiateTwilio(this, twilioId, request)
   }
 }
 

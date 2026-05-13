@@ -89,6 +89,21 @@ export function deleteEmailIntegration(client: ChatBotKitClient, emailId: string
  * @returns {Promise<EmailIntegrationSetupResponse>}
  */
 export function setupEmailIntegration(client: ChatBotKitClient, emailId: string): Promise<EmailIntegrationSetupResponse>;
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateEmail']['requestBody']['content']['application/json']} EmailInitiateRequestBody
+ *
+ * @typedef {EmailInitiateRequestBody} EmailInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateEmail']['responses']['200']['content']['application/json']} EmailInitiateResponseBody
+ *
+ * @typedef {EmailInitiateResponseBody} EmailInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} emailId
+ * @param {EmailInitiateRequest} request
+ * @returns {Promise<EmailInitiateResponse>}
+ */
+export function initiateEmail(client: ChatBotKitClient, emailId: string, request: EmailInitiateRequest): Promise<EmailInitiateResponse>;
 export type ChatBotKitClient = import("../../client.js").ChatBotKitClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;
 export type EmailIntegrationListRequest = {
@@ -116,3 +131,7 @@ export type EmailIntegrationSetupRequestBody = import("../../types/api/v1.js").o
 export type EmailIntegrationSetupRequest = EmailIntegrationSetupRequestBody;
 export type EmailIntegrationSetupResponseBody = import("../../types/api/v1.js").operations["setupEmailIntegration"]["responses"]["200"]["content"]["application/json"];
 export type EmailIntegrationSetupResponse = EmailIntegrationSetupResponseBody;
+export type EmailInitiateRequestBody = import("../../types/api/v1.js").operations["initiateEmail"]["requestBody"]["content"]["application/json"];
+export type EmailInitiateRequest = EmailInitiateRequestBody;
+export type EmailInitiateResponseBody = import("../../types/api/v1.js").operations["initiateEmail"]["responses"]["200"]["content"]["application/json"];
+export type EmailInitiateResponse = EmailInitiateResponseBody;

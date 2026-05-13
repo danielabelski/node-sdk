@@ -3,6 +3,7 @@ import {
   createEmailIntegration,
   deleteEmailIntegration,
   fetchEmailIntegration,
+  initiateEmail,
   listEmailIntegrations,
   setupEmailIntegration,
   updateEmailIntegration,
@@ -81,6 +82,17 @@ export class EmailIntegrationClient extends ChatBotKitClient {
    */
   setup(emailId) {
     return setupEmailIntegration(this, emailId)
+  }
+
+  /**
+   * Initiates a email integration conversation.
+   *
+   * @param {string} emailId
+   * @param {import('./v1.js').EmailInitiateRequest} request
+   * @returns {Promise<import('./v1.js').EmailInitiateResponse>}
+   */
+  initiate(emailId, request) {
+    return initiateEmail(this, emailId, request)
   }
 }
 

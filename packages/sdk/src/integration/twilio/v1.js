@@ -156,3 +156,31 @@ export async function setupTwilioIntegration(client, twilioId) {
 
   return response
 }
+
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateTwilio']['requestBody']['content']['application/json']} TwilioInitiateRequestBody
+ *
+ * @typedef {TwilioInitiateRequestBody} TwilioInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateTwilio']['responses']['200']['content']['application/json']} TwilioInitiateResponseBody
+ *
+ * @typedef {TwilioInitiateResponseBody} TwilioInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} twilioId
+ * @param {TwilioInitiateRequest} request
+ * @returns {Promise<TwilioInitiateResponse>}
+ */
+export async function initiateTwilio(client, twilioId, request) {
+  const url = `/api/v1/integration/twilio/${twilioId}/initiate`
+
+  /** @type {TwilioInitiateResponseBody} */
+  const response = await client.clientFetch(url, {
+    /** @type {TwilioInitiateRequestBody} */
+    record: {
+      ...request,
+    },
+  })
+
+  return response
+}

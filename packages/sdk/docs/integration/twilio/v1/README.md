@@ -10,6 +10,10 @@
 
 - [ChatBotKitClient](type-aliases/ChatBotKitClient.md)
 - [ResponsePromise](type-aliases/ResponsePromise.md)
+- [TwilioInitiateRequest](type-aliases/TwilioInitiateRequest.md)
+- [TwilioInitiateRequestBody](type-aliases/TwilioInitiateRequestBody.md)
+- [TwilioInitiateResponse](type-aliases/TwilioInitiateResponse.md)
+- [TwilioInitiateResponseBody](type-aliases/TwilioInitiateResponseBody.md)
 - [TwilioIntegrationCreateRequest](type-aliases/TwilioIntegrationCreateRequest.md)
 - [TwilioIntegrationCreateRequestBody](type-aliases/TwilioIntegrationCreateRequestBody.md)
 - [TwilioIntegrationCreateResponse](type-aliases/TwilioIntegrationCreateResponse.md)
@@ -36,6 +40,7 @@
 - [createTwilioIntegration](functions/createTwilioIntegration.md)
 - [deleteTwilioIntegration](functions/deleteTwilioIntegration.md)
 - [fetchTwilioIntegration](functions/fetchTwilioIntegration.md)
+- [initiateTwilio](functions/initiateTwilio.md)
 - [listTwilioIntegrations](functions/listTwilioIntegrations.md)
 - [setupTwilioIntegration](functions/setupTwilioIntegration.md)
 - [updateTwilioIntegration](functions/updateTwilioIntegration.md)

@@ -47,6 +47,14 @@ export class SlackIntegrationClient extends ChatBotKitClient {
      * @returns {Promise<import('./v1.js').SlackIntegrationSetupResponse>}
      */
     setup(slackId: string): Promise<import("./v1.js").SlackIntegrationSetupResponse>;
+    /**
+     * Initiates a slack integration conversation.
+     *
+     * @param {string} slackId
+     * @param {import('./v1.js').SlackInitiateRequest} request
+     * @returns {Promise<import('./v1.js').SlackInitiateResponse>}
+     */
+    initiate(slackId: string, request: import("./v1.js").SlackInitiateRequest): Promise<import("./v1.js").SlackInitiateResponse>;
 }
 export default SlackIntegrationClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;
