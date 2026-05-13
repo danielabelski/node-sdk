@@ -613,8 +613,12 @@ export const TwilioIntegrationResourceConfigSchema =
       meta: z.record(z.unknown()).optional(),
       blueprintId: z.string().optional(),
       botId: z.string().optional(),
+      accountSid: z.string().optional(),
+      authToken: z.string().optional(),
+      voice: z.string().optional(),
       contactCollection: z.boolean().optional(),
       sessionDuration: z.number().optional(),
+      allowFrom: z.string().optional(),
     }),
   })
 
