@@ -9,6 +9,10 @@
 ## Type Aliases
 
 - [ChatBotKitClient](type-aliases/ChatBotKitClient.md)
+- [EmailInitiateRequest](type-aliases/EmailInitiateRequest.md)
+- [EmailInitiateRequestBody](type-aliases/EmailInitiateRequestBody.md)
+- [EmailInitiateResponse](type-aliases/EmailInitiateResponse.md)
+- [EmailInitiateResponseBody](type-aliases/EmailInitiateResponseBody.md)
 - [EmailIntegrationCreateRequest](type-aliases/EmailIntegrationCreateRequest.md)
 - [EmailIntegrationCreateRequestBody](type-aliases/EmailIntegrationCreateRequestBody.md)
 - [EmailIntegrationCreateResponse](type-aliases/EmailIntegrationCreateResponse.md)
@@ -36,6 +40,7 @@
 - [createEmailIntegration](functions/createEmailIntegration.md)
 - [deleteEmailIntegration](functions/deleteEmailIntegration.md)
 - [fetchEmailIntegration](functions/fetchEmailIntegration.md)
+- [initiateEmail](functions/initiateEmail.md)
 - [listEmailIntegrations](functions/listEmailIntegrations.md)
 - [setupEmailIntegration](functions/setupEmailIntegration.md)
 - [updateEmailIntegration](functions/updateEmailIntegration.md)

@@ -47,6 +47,14 @@ export class TwilioIntegrationClient extends ChatBotKitClient {
      * @returns {Promise<import('./v1.js').TwilioIntegrationSetupResponse>}
      */
     setup(twilioId: string): Promise<import("./v1.js").TwilioIntegrationSetupResponse>;
+    /**
+     * Initiates a twilio integration conversation.
+     *
+     * @param {string} twilioId
+     * @param {import('./v1.js').TwilioInitiateRequest} request
+     * @returns {Promise<import('./v1.js').TwilioInitiateResponse>}
+     */
+    initiate(twilioId: string, request: import("./v1.js").TwilioInitiateRequest): Promise<import("./v1.js").TwilioInitiateResponse>;
 }
 export default TwilioIntegrationClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;

@@ -6,7 +6,7 @@
 
 # Class: SlackIntegrationClient
 
-Defined in: [integration/slack/index.js:17](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L17)
+Defined in: [integration/slack/index.js:18](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L18)
 
 ## Template
 
@@ -22,7 +22,7 @@ Defined in: [integration/slack/index.js:17](https://github.com/chatbotkit/node-s
 
 > **new SlackIntegrationClient**(`options`): `SlackIntegrationClient`
 
-Defined in: [integration/slack/index.js:21](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L21)
+Defined in: [integration/slack/index.js:22](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L22)
 
 #### Parameters
 
@@ -44,7 +44,7 @@ Defined in: [integration/slack/index.js:21](https://github.com/chatbotkit/node-s
 
 > **create**(`request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [integration/slack/index.js:51](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L51)
+Defined in: [integration/slack/index.js:52](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L52)
 
 Creates a new slack integration.
 
@@ -62,7 +62,7 @@ Creates a new slack integration.
 
 > **delete**(`slackId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [integration/slack/index.js:72](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L72)
+Defined in: [integration/slack/index.js:73](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L73)
 
 Deletes a slack integration.
 
@@ -116,7 +116,7 @@ A new instance of the same client class with extended options
 
 > **fetch**(`slackId`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, `never`\>
 
-Defined in: [integration/slack/index.js:41](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L41)
+Defined in: [integration/slack/index.js:42](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L42)
 
 Fetches a slack integration.
 
@@ -132,11 +132,33 @@ Fetches a slack integration.
 
 ***
 
+### initiate()
+
+> **initiate**(`slackId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
+
+Defined in: [integration/slack/index.js:94](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L94)
+
+Initiates a slack integration conversation.
+
+#### Parameters
+
+##### slackId
+
+`string`
+
+##### request
+
+#### Returns
+
+[`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
+
+***
+
 ### list()
 
 > **list**(`request?`): [`ResponsePromise`](../../../client/classes/ResponsePromise.md)\<\{ \}, \{ \}\>
 
-Defined in: [integration/slack/index.js:31](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L31)
+Defined in: [integration/slack/index.js:32](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L32)
 
 Retrieves a list of all slack integrations.
 
@@ -156,7 +178,7 @@ Retrieves a list of all slack integrations.
 
 > **setup**(`slackId`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [integration/slack/index.js:82](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L82)
+Defined in: [integration/slack/index.js:83](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L83)
 
 Setups a slack integration.
 
@@ -176,7 +198,7 @@ Setups a slack integration.
 
 > **update**(`slackId`, `request`): [`Promise`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)\<\{ \}\>
 
-Defined in: [integration/slack/index.js:62](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L62)
+Defined in: [integration/slack/index.js:63](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/integration/slack/index.js#L63)
 
 Updates a slack integration.
 

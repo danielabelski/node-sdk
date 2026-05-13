@@ -21,6 +21,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/integration/email/{emailIntegrationId}/initiate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Initiates conversation with the email integration */
+        post: operations["initiateEmail"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/integration/slack/{slackIntegrationId}/initiate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Initiates conversation with the slack integration */
+        post: operations["initiateSlack"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/integration/twilio/{twilioIntegrationId}/initiate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Initiates conversation with the twilio integration */
+        post: operations["initiateTwilio"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/platform/report/{reportId}/generate": {
         parameters: {
             query?: never;
@@ -96,10 +147,11 @@ export interface paths {
         /**
          * Subscribe to task workflow events
          * @description Subscribe to real-time task workflow events. The stream currently
-         *     includes operation begin and operation end events emitted by the
-         *     task's conversation engine while a task execution is running. The
+         *     includes operation begin, operation end, and error events emitted by
+         *     the task's conversation engine while a task execution is running. The
          *     response uses the same streaming envelope shape as conversation
-         *     completion endpoints: each line is an event with a `type` and `data`.
+         *     completion endpoints: each line is an event with a `type`, `createdAt`,
+         *     and `data`.
          *
          */
         post: operations["subscribeTaskWorkflowEvents"];
@@ -5992,6 +6044,85 @@ export interface components {
                 outputTokensUsed: number;
             };
         };
+        /** @description An item in the task workflow subscription response */
+        TaskWorkflowStreamingResponseItem: {
+            /**
+             * @description The type of event
+             * @enum {string}
+             */
+            type: "operationBegin";
+            /** @description The event creation timestamp in milliseconds since the Unix epoch */
+            createdAt: number;
+            /** @description The data for the operation begin event */
+            data: {
+                /** @description The operation ID */
+                id: string;
+                /** @description The action associated with the operation */
+                action: {
+                    /** @description The action ID */
+                    id: string;
+                    /**
+                     * @description The action kind
+                     * @enum {string}
+                     */
+                    kind?: "dataset" | "skillset" | "function";
+                    /** @description The action name */
+                    name?: string;
+                    /** @description The action input */
+                    input?: unknown;
+                    /** @description The action justification */
+                    justification?: string;
+                    /** @description The action icon */
+                    icon?: string;
+                };
+            };
+        } | {
+            /**
+             * @description The type of event
+             * @enum {string}
+             */
+            type: "operationEnd";
+            /** @description The event creation timestamp in milliseconds since the Unix epoch */
+            createdAt: number;
+            /** @description The data for the operation end event */
+            data: {
+                /** @description The operation ID */
+                id: string;
+                /** @description The action associated with the operation */
+                action: {
+                    /** @description The action ID */
+                    id: string;
+                    /**
+                     * @description The action kind
+                     * @enum {string}
+                     */
+                    kind?: "dataset" | "skillset" | "function";
+                    /** @description The action name */
+                    name?: string;
+                    /** @description The action input */
+                    input?: unknown;
+                    /** @description The action justification */
+                    justification?: string;
+                    /** @description The action icon */
+                    icon?: string;
+                };
+            };
+        } | {
+            /**
+             * @description The type of event
+             * @enum {string}
+             */
+            type: "error";
+            /** @description The event creation timestamp in milliseconds since the Unix epoch */
+            createdAt: number;
+            /** @description The data for the error event */
+            data: {
+                /** @description The error code */
+                code: string;
+                /** @description The error message */
+                message: string;
+            };
+        };
     };
     responses: {
         /** @description An error response */
@@ -6049,6 +6180,136 @@ export interface operations {
                         errors?: {
                             message?: string;
                         }[];
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    initiateEmail: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * Format: email
+                     * @description The email address to use for the conversation
+                     */
+                    email: string;
+                    /** @description The subject of the email */
+                    subject: string;
+                    /** @description The text instruction to use to initiate the conversation */
+                    text: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The email integration was successfully initiated */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the initiated integration */
+                        id: string;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    initiateSlack: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The Slack channel or user to send to */
+                    channel: string;
+                    /** @description The text instruction to use to initiate the conversation */
+                    text: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The slack integration was successfully initiated */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the initiated integration */
+                        id: string;
+                    };
+                };
+            };
+            /** @description An error response */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    initiateTwilio: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The Twilio channel to use for the conversation
+                     * @default sms
+                     * @enum {string}
+                     */
+                    channel?: "sms" | "call";
+                    /** @description The Twilio sender phone number */
+                    from: string;
+                    /** @description The recipient phone number */
+                    to: string;
+                    /** @description The text instruction to use to initiate the conversation */
+                    text: string;
+                };
+            };
+        };
+        responses: {
+            /** @description The twilio integration was successfully initiated */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The ID of the initiated integration */
+                        id: string;
                     };
                 };
             };
@@ -6250,10 +6511,77 @@ export interface operations {
                          * @description The type of event
                          * @enum {string}
                          */
-                        type: "operationBegin" | "operationEnd";
-                        /** @description The task workflow operation event data */
+                        type: "operationBegin";
+                        /** @description The event creation timestamp in milliseconds since the Unix epoch */
+                        createdAt: number;
+                        /** @description The data for the operation begin event */
                         data: {
-                            [key: string]: unknown;
+                            /** @description The operation ID */
+                            id: string;
+                            /** @description The action associated with the operation */
+                            action: {
+                                /** @description The action ID */
+                                id: string;
+                                /**
+                                 * @description The action kind
+                                 * @enum {string}
+                                 */
+                                kind?: "dataset" | "skillset" | "function";
+                                /** @description The action name */
+                                name?: string;
+                                /** @description The action input */
+                                input?: unknown;
+                                /** @description The action justification */
+                                justification?: string;
+                                /** @description The action icon */
+                                icon?: string;
+                            };
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "operationEnd";
+                        /** @description The event creation timestamp in milliseconds since the Unix epoch */
+                        createdAt: number;
+                        /** @description The data for the operation end event */
+                        data: {
+                            /** @description The operation ID */
+                            id: string;
+                            /** @description The action associated with the operation */
+                            action: {
+                                /** @description The action ID */
+                                id: string;
+                                /**
+                                 * @description The action kind
+                                 * @enum {string}
+                                 */
+                                kind?: "dataset" | "skillset" | "function";
+                                /** @description The action name */
+                                name?: string;
+                                /** @description The action input */
+                                input?: unknown;
+                                /** @description The action justification */
+                                justification?: string;
+                                /** @description The action icon */
+                                icon?: string;
+                            };
+                        };
+                    } | {
+                        /**
+                         * @description The type of event
+                         * @enum {string}
+                         */
+                        type: "error";
+                        /** @description The event creation timestamp in milliseconds since the Unix epoch */
+                        createdAt: number;
+                        /** @description The data for the error event */
+                        data: {
+                            /** @description The error code */
+                            code: string;
+                            /** @description The error message */
+                            message: string;
                         };
                     };
                 };
@@ -18508,10 +18836,16 @@ export interface operations {
                         botId?: string;
                         /** @description The ID of the blueprint */
                         blueprintId?: string;
+                        /** @description The Twilio account SID */
+                        accountSid?: string;
+                        /** @description The voice configuration structured string */
+                        voice?: string;
                         /** @description Weather to collect contacts */
                         contactCollection?: boolean;
                         /** @description The session duration (in milliseconds) */
                         sessionDuration?: number;
+                        /** @description Newline-or-comma-separated list of allowed senders */
+                        allowFrom?: string;
                     };
                 };
             };
@@ -18584,10 +18918,18 @@ export interface operations {
                     blueprintId?: string;
                     /** @description The ID of the bot this configuration is using */
                     botId?: string;
+                    /** @description The Twilio account SID */
+                    accountSid?: string;
+                    /** @description The Twilio auth token */
+                    authToken?: string;
+                    /** @description The voice configuration structured string */
+                    voice?: string;
                     /** @description Weather to collect contacts */
                     contactCollection?: boolean;
                     /** @description The session duration (in milliseconds) */
                     sessionDuration?: number;
+                    /** @description Newline-or-comma-separated list of allowed senders. Use E.164 phone numbers with or without the leading `+`. Set to `*` to allow all. Leave empty to deny all. */
+                    allowFrom?: string;
                 };
             };
         };
@@ -18635,10 +18977,18 @@ export interface operations {
                     blueprintId?: string;
                     /** @description The ID of the bot this configuration is using */
                     botId?: string;
+                    /** @description The Twilio account SID */
+                    accountSid?: string;
+                    /** @description The Twilio auth token */
+                    authToken?: string;
+                    /** @description The voice configuration structured string */
+                    voice?: string;
                     /** @description Weather to collect contacts */
                     contactCollection?: boolean;
                     /** @description The session duration (in milliseconds) */
                     sessionDuration?: number;
+                    /** @description Newline-or-comma-separated list of allowed senders. Use E.164 phone numbers with or without the leading `+`. Set to `*` to allow all. Leave empty to deny all. */
+                    allowFrom?: string;
                 };
             };
         };
@@ -18706,10 +19056,16 @@ export interface operations {
                             botId?: string;
                             /** @description The ID of the blueprint */
                             blueprintId?: string;
+                            /** @description The Twilio account SID */
+                            accountSid?: string;
+                            /** @description The voice configuration structured string */
+                            voice?: string;
                             /** @description Weather to collect contacts */
                             contactCollection?: boolean;
                             /** @description The session duration (in milliseconds) */
                             sessionDuration?: number;
+                            /** @description Newline-or-comma-separated list of allowed senders */
+                            allowFrom?: string;
                         }[];
                         /** @description Cursor for fetching the next page */
                         cursor: string;
@@ -18740,10 +19096,16 @@ export interface operations {
                             botId?: string;
                             /** @description The ID of the blueprint */
                             blueprintId?: string;
+                            /** @description The Twilio account SID */
+                            accountSid?: string;
+                            /** @description The voice configuration structured string */
+                            voice?: string;
                             /** @description Weather to collect contacts */
                             contactCollection?: boolean;
                             /** @description The session duration (in milliseconds) */
                             sessionDuration?: number;
+                            /** @description Newline-or-comma-separated list of allowed senders */
+                            allowFrom?: string;
                         };
                     };
                 };

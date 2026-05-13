@@ -3,6 +3,7 @@ import {
   createSlackIntegration,
   deleteSlackIntegration,
   fetchSlackIntegration,
+  initiateSlack,
   listSlackIntegrations,
   setupSlackIntegration,
   updateSlackIntegration,
@@ -81,6 +82,17 @@ export class SlackIntegrationClient extends ChatBotKitClient {
    */
   setup(slackId) {
     return setupSlackIntegration(this, slackId)
+  }
+
+  /**
+   * Initiates a slack integration conversation.
+   *
+   * @param {string} slackId
+   * @param {import('./v1.js').SlackInitiateRequest} request
+   * @returns {Promise<import('./v1.js').SlackInitiateResponse>}
+   */
+  initiate(slackId, request) {
+    return initiateSlack(this, slackId, request)
   }
 }
 

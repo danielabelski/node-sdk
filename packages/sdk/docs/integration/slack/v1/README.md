@@ -10,6 +10,10 @@
 
 - [ChatBotKitClient](type-aliases/ChatBotKitClient.md)
 - [ResponsePromise](type-aliases/ResponsePromise.md)
+- [SlackInitiateRequest](type-aliases/SlackInitiateRequest.md)
+- [SlackInitiateRequestBody](type-aliases/SlackInitiateRequestBody.md)
+- [SlackInitiateResponse](type-aliases/SlackInitiateResponse.md)
+- [SlackInitiateResponseBody](type-aliases/SlackInitiateResponseBody.md)
 - [SlackIntegrationCreateRequest](type-aliases/SlackIntegrationCreateRequest.md)
 - [SlackIntegrationCreateRequestBody](type-aliases/SlackIntegrationCreateRequestBody.md)
 - [SlackIntegrationCreateResponse](type-aliases/SlackIntegrationCreateResponse.md)
@@ -36,6 +40,7 @@
 - [createSlackIntegration](functions/createSlackIntegration.md)
 - [deleteSlackIntegration](functions/deleteSlackIntegration.md)
 - [fetchSlackIntegration](functions/fetchSlackIntegration.md)
+- [initiateSlack](functions/initiateSlack.md)
 - [listSlackIntegrations](functions/listSlackIntegrations.md)
 - [setupSlackIntegration](functions/setupSlackIntegration.md)
 - [updateSlackIntegration](functions/updateSlackIntegration.md)

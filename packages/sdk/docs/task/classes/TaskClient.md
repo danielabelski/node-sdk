@@ -200,7 +200,7 @@ Retrieves a list of all tasks.
 
 ### subscribe()
 
-> **subscribe**(`taskId`, `request?`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \}\>
+> **subscribe**(`taskId`, `request?`): [`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \} \| \{ \} \| \{ \}\>
 
 Defined in: [task/index.js:125](https://github.com/chatbotkit/node-sdk/blob/main/sdks/node/packages/sdk/src/task/index.js#L125)
 
@@ -216,7 +216,7 @@ Subscribes to task workflow events.
 
 #### Returns
 
-[`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \}\>
+[`ResponsePromise`](../../client/classes/ResponsePromise.md)\<`never`, \{ \} \| \{ \} \| \{ \}\>
 
 ***
 

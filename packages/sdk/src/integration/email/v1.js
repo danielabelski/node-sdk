@@ -156,3 +156,31 @@ export async function setupEmailIntegration(client, emailId) {
 
   return response
 }
+
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateEmail']['requestBody']['content']['application/json']} EmailInitiateRequestBody
+ *
+ * @typedef {EmailInitiateRequestBody} EmailInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateEmail']['responses']['200']['content']['application/json']} EmailInitiateResponseBody
+ *
+ * @typedef {EmailInitiateResponseBody} EmailInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} emailId
+ * @param {EmailInitiateRequest} request
+ * @returns {Promise<EmailInitiateResponse>}
+ */
+export async function initiateEmail(client, emailId, request) {
+  const url = `/api/v1/integration/email/${emailId}/initiate`
+
+  /** @type {EmailInitiateResponseBody} */
+  const response = await client.clientFetch(url, {
+    /** @type {EmailInitiateRequestBody} */
+    record: {
+      ...request,
+    },
+  })
+
+  return response
+}

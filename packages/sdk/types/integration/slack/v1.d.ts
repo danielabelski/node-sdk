@@ -89,6 +89,21 @@ export function deleteSlackIntegration(client: ChatBotKitClient, slackId: string
  * @returns {Promise<SlackIntegrationSetupResponse>}
  */
 export function setupSlackIntegration(client: ChatBotKitClient, slackId: string): Promise<SlackIntegrationSetupResponse>;
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateSlack']['requestBody']['content']['application/json']} SlackInitiateRequestBody
+ *
+ * @typedef {SlackInitiateRequestBody} SlackInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateSlack']['responses']['200']['content']['application/json']} SlackInitiateResponseBody
+ *
+ * @typedef {SlackInitiateResponseBody} SlackInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} slackId
+ * @param {SlackInitiateRequest} request
+ * @returns {Promise<SlackInitiateResponse>}
+ */
+export function initiateSlack(client: ChatBotKitClient, slackId: string, request: SlackInitiateRequest): Promise<SlackInitiateResponse>;
 export type ChatBotKitClient = import("../../client.js").ChatBotKitClient;
 export type ResponsePromise<T, U> = import("../../client.js").ResponsePromise<T, U>;
 export type SlackIntegrationListRequest = {
@@ -116,3 +131,7 @@ export type SlackIntegrationSetupRequestBody = import("../../types/api/v1.js").o
 export type SlackIntegrationSetupRequest = SlackIntegrationSetupRequestBody;
 export type SlackIntegrationSetupResponseBody = import("../../types/api/v1.js").operations["setupSlackIntegration"]["responses"]["200"]["content"]["application/json"];
 export type SlackIntegrationSetupResponse = SlackIntegrationSetupResponseBody;
+export type SlackInitiateRequestBody = import("../../types/api/v1.js").operations["initiateSlack"]["requestBody"]["content"]["application/json"];
+export type SlackInitiateRequest = SlackInitiateRequestBody;
+export type SlackInitiateResponseBody = import("../../types/api/v1.js").operations["initiateSlack"]["responses"]["200"]["content"]["application/json"];
+export type SlackInitiateResponse = SlackInitiateResponseBody;

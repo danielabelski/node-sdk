@@ -156,3 +156,31 @@ export async function setupSlackIntegration(client, slackId) {
 
   return response
 }
+
+/**
+ * @typedef {import('../../types/api/v1.js').operations['initiateSlack']['requestBody']['content']['application/json']} SlackInitiateRequestBody
+ *
+ * @typedef {SlackInitiateRequestBody} SlackInitiateRequest
+ *
+ * @typedef {import('../../types/api/v1.js').operations['initiateSlack']['responses']['200']['content']['application/json']} SlackInitiateResponseBody
+ *
+ * @typedef {SlackInitiateResponseBody} SlackInitiateResponse
+ *
+ * @param {ChatBotKitClient} client
+ * @param {string} slackId
+ * @param {SlackInitiateRequest} request
+ * @returns {Promise<SlackInitiateResponse>}
+ */
+export async function initiateSlack(client, slackId, request) {
+  const url = `/api/v1/integration/slack/${slackId}/initiate`
+
+  /** @type {SlackInitiateResponseBody} */
+  const response = await client.clientFetch(url, {
+    /** @type {SlackInitiateRequestBody} */
+    record: {
+      ...request,
+    },
+  })
+
+  return response
+}
